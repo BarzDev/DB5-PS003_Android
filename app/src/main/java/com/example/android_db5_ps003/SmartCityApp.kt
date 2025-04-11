@@ -3,8 +3,6 @@ package com.example.android_db5_ps003
 import androidx.compose.foundation.layout.padding
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.Home
-import androidx.compose.material.icons.filled.Info
-import androidx.compose.material.icons.filled.Phone
 import androidx.compose.material3.Icon
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.NavigationBar
@@ -15,7 +13,9 @@ import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.getValue
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.graphics.vector.ImageVector
 import androidx.compose.ui.res.stringResource
+import androidx.compose.ui.res.vectorResource
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.navigation.NavGraph.Companion.findStartDestination
 import androidx.navigation.NavHostController
@@ -81,12 +81,12 @@ private fun BottomBar(
             ),
             NavigationItem(
                 title = stringResource(R.string.menu_catalogue),
-                icon = Icons.Default.Info,
-                screen = Screen.Catalogue
+                icon = ImageVector.vectorResource(id = R.drawable.ic_catalogue),
+                screen = Screen.Catalogue,
             ),
             NavigationItem(
                 title = stringResource(R.string.menu_emergency),
-                icon = Icons.Default.Phone,
+                icon = ImageVector.vectorResource(id = R.drawable.ic_emergency_call),
                 screen = Screen.Emergency
             ),
         )

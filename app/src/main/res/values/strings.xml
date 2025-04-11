@@ -3,4 +3,7 @@
     <string name="menu_home">Beranda</string>
     <string name="menu_catalogue">Katalog</string>
     <string name="menu_emergency">Darurat</string>
+    <string name="katalog_kuliner">Katalog Kuliner</string>
+    <string name="katalog_umkm">Katalog UMKM</string>
+    <string name="katalog_wisata">Katalog Wisata</string>
 </resources>
