@@ -1,3 +1,6 @@
 <resources>
     <string name="app_name">Android_DB5-PS003</string>
+    <string name="menu_home">Beranda</string>
+    <string name="menu_catalogue">Katalog</string>
+    <string name="menu_emergency">Darurat</string>
 </resources>
