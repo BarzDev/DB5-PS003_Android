@@ -1,10 +1,12 @@
 package com.example.android_db5_ps003.data.remote.retrofit
 
+import com.example.android_db5_ps003.data.remote.response.UmkmItem
+import com.example.android_db5_ps003.data.remote.response.UmkmResponse
 import retrofit2.Call
 import retrofit2.http.GET
+import retrofit2.http.Path
 
 interface ApiService {
-//  sesuaikan dengan model response masing masing
 
     @GET("api/berita")
     fun getDataBerita(): Call<List<String>>
@@ -13,8 +15,12 @@ interface ApiService {
     fun getDataKuliner(): Call<List<String>>
 
     @GET("api/umkm")
-    fun getDataUmkm(): Call<List<String>>
+    suspend fun getDataUmkm(): UmkmResponse
+
+    @GET("api/umkm/{id}")
+    suspend fun getDetailUmkm(@Path("id") id: Int): UmkmItem
 
     @GET("api/wisata")
     fun getDataWisata(): Call<List<String>>
+
 }
