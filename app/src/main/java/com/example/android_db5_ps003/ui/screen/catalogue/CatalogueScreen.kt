@@ -1,5 +1,6 @@
 package com.example.android_db5_ps003.ui.screen.catalogue
 
+import android.content.Intent
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Spacer
@@ -20,17 +21,21 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.graphics.painter.Painter
+import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import com.example.android_db5_ps003.R
+import com.example.android_db5_ps003.ui.screen.umkm.UmkmActivity
 
 
 @Composable
 fun CatalogueScreen(
     modifier: Modifier = Modifier
 ) {
+    val context = LocalContext.current
+
     Column(
         modifier = modifier
             .fillMaxSize()
@@ -49,7 +54,10 @@ fun CatalogueScreen(
         CatalogueItem(
             icon = painterResource(id = R.drawable.ic_store),
             text = stringResource(R.string.katalog_umkm),
-            onClick = { /* TODO */ }
+            onClick = {
+                val intent = Intent(context, UmkmActivity::class.java)
+                context.startActivity(intent)
+            },
         )
         CatalogueItem(
             icon = painterResource(id = R.drawable.ic_maps),

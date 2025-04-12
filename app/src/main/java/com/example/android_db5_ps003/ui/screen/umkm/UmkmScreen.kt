@@ -29,13 +29,21 @@ import com.example.android_db5_ps003.ui.screen.umkm_catalogue.UmkmCatalogueScree
 @Composable
 fun UmkmScreen(
     modifier: Modifier = Modifier,
-
+    navController: NavHostController = rememberNavController(),
 ) {
     Scaffold(
         topBar = { TopBar() },
         modifier = modifier
         ) { innerPadding ->
-
+        NavHost(
+            navController = navController,
+            startDestination = Screen.UmkmCatalogue.route,
+            modifier = Modifier.padding(innerPadding),
+        ){
+            composable(Screen.UmkmCatalogue.route) {
+                UmkmCatalogueScreen()
+            }
+        }
 
     }
 }
