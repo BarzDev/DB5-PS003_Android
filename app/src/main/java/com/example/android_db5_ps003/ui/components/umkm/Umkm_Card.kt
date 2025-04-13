@@ -66,7 +66,7 @@ fun Umkm_Card(
                         .clip(RoundedCornerShape(8.dp))
                 )
                 Text(
-                    text = stringResource(R.string.umkm_price, price),
+                    text = price,
                     color = Color.White,
                     fontWeight = FontWeight.Bold,
                     fontSize = 14.sp,
