@@ -7,4 +7,6 @@
     <string name="katalog_umkm">Katalog UMKM</string>
     <string name="katalog_wisata">Katalog Wisata</string>
     <string name="detail_umkm">Detail UMKM</string>
+    <string name="umkm_price">Rp. %s</string>
+    <string name="umkm_owner">by %s</string>
 </resources>
