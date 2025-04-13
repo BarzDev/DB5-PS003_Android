@@ -1,11 +1,12 @@
 package com.example.android_db5_ps003.data.repository
 
+import com.example.android_db5_ps003.data.remote.response.UmkmResponse
 import com.example.android_db5_ps003.data.remote.retrofit.ApiConfig
 
 class UmkmRepository {
 
-    suspend fun fetchData() {
-        ApiConfig.getApiService().getDataUmkm()
+    suspend fun fetchData() : UmkmResponse {
+        return ApiConfig.getApiService().getDataUmkm()
     }
 
     companion object {
