@@ -1,6 +1,5 @@
 package com.example.android_db5_ps003.ui.screen.umkm_catalogue
 
-import android.util.Log
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.example.android_db5_ps003.data.remote.response.UmkmItem

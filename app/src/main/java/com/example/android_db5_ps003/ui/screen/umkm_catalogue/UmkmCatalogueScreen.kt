@@ -47,7 +47,11 @@ fun UmkmCatalogueScreen(
                 modifier = modifier
                     .padding(horizontal = 8.dp)
             ) {
-                UmkmList(umkms = state.data, modifier = modifier, navigateToDetail = navigateToDetail)
+                UmkmList(
+                    umkms = state.data,
+                    modifier = modifier,
+                    navigateToDetail = navigateToDetail
+                )
             }
 
         }
