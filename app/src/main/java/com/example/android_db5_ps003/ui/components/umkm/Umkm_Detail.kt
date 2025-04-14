@@ -2,6 +2,7 @@ package com.example.android_db5_ps003.ui.components.umkm
 
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.background
+import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
@@ -16,6 +17,7 @@ import androidx.compose.material3.HorizontalDivider
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
+import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
 import androidx.compose.ui.graphics.Color
@@ -74,7 +76,11 @@ fun Umkm_Detail(
             }
 
             Row(
-                modifier = modifier.padding(horizontal = 20.dp)
+                modifier = modifier
+                    .padding(horizontal = 20.dp)
+                    .fillMaxWidth(),
+                verticalAlignment = Alignment.CenterVertically,
+                horizontalArrangement = Arrangement.SpaceBetween
             ) {
                 Text(
                     text = price,
@@ -82,6 +88,8 @@ fun Umkm_Detail(
                     style = MaterialTheme.typography.titleMedium
 
                 )
+
+                Umkm_ECommerce()
 
             }
 
