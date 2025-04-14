@@ -7,5 +7,8 @@
     <string name="katalog_umkm">Katalog UMKM</string>
     <string name="katalog_wisata">Katalog Wisata</string>
     <string name="detail_umkm">Detail UMKM</string>
-    <string name="umkm_owner">by %s</string>
+    <string name="umkm_owner_label">by %s</string>
+    <string name="umkm_owner">Pemilik : %s</string>
+    <string name="umkm_location">Lokasi : %s</string>
+    <string name="umkm_contact">Kontak : 021-12XXXXX</string>
 </resources>

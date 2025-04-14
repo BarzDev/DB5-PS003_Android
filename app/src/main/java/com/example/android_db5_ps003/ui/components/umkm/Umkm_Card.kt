@@ -91,7 +91,7 @@ fun Umkm_Card(
             )
 
             Text(
-                text = stringResource(R.string.umkm_owner, owner),
+                text = stringResource(R.string.umkm_owner_label, owner),
                 style = MaterialTheme.typography.bodySmall,
                 color = MaterialTheme.colorScheme.primary,
                 modifier = Modifier.padding(4.dp),
