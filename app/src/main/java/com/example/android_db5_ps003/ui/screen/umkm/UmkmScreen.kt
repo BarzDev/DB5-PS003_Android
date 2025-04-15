@@ -48,15 +48,15 @@ fun UmkmScreen(
             composable(Screen.UmkmCatalogue.route) {
                 UmkmCatalogueScreen(
                     navigateToDetail = { id ->
-                        navController.navigate(Screen.UmkmDetail.createRoute(id)) },
+                        navController.navigate(Screen.UmkmDetail.createRoute(id))
+                    },
                 )
             }
             composable(
-                route =Screen.UmkmDetail.route,
-                arguments = listOf(navArgument("id") { type = NavType.IntType }),) {
-                UmkmDetailScreen(
-                    id = it.arguments?.getInt("id") ?: 0,
-                )
+                route = Screen.UmkmDetail.route,
+                arguments = listOf(navArgument("id") { type = NavType.IntType }),
+            ) {
+                UmkmDetailScreen(id = it.arguments?.getInt("id") ?: 0)
             }
         }
 
@@ -92,7 +92,8 @@ fun TopBar(
                 } else {
                     navController.popBackStack()
                 }
-            }) {
+            }
+            ) {
                 Icon(
                     imageVector = Icons.AutoMirrored.Filled.ArrowBack,
                     contentDescription = "Localized description",

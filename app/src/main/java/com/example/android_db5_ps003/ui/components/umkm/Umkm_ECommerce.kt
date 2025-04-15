@@ -11,8 +11,8 @@ import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.aspectRatio
 import androidx.compose.foundation.layout.fillMaxSize
-import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
+import androidx.compose.foundation.layout.size
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
@@ -39,9 +39,8 @@ fun Umkm_ECommerce(
     ) {
         EcommerceButton(
             icon = painterResource(id = R.drawable.img_shopee),
-            color = Color(0xFFFF5722),
             modifier = Modifier
-                .height(24.dp)
+                .size(24.dp)
                 .clickable {
                     val msg = context.getString(R.string.umkm_linked, "Shopee")
                     Toast
@@ -51,9 +50,8 @@ fun Umkm_ECommerce(
         )
         EcommerceButton(
             icon = painterResource(id = R.drawable.img_tokopedia),
-            color = Color(0xFF03AC0E),
             modifier = Modifier
-                .height(24.dp)
+                .size(24.dp)
                 .clickable {
                     val msg = context.getString(R.string.umkm_linked, "Tokopedia")
                     Toast
@@ -64,9 +62,8 @@ fun Umkm_ECommerce(
             )
         EcommerceButton(
             icon = painterResource(id = R.drawable.img_tiktokshop),
-            color = Color.Black,
             modifier = Modifier
-                .height(24.dp)
+                .size(24.dp)
                 .clickable {
                     val msg = context.getString(R.string.umkm_linked, "Tiktok Shop")
                     Toast
@@ -76,9 +73,8 @@ fun Umkm_ECommerce(
         )
         EcommerceButton(
             icon = painterResource(id = R.drawable.img_web),
-            color = Color.Black,
             modifier = Modifier
-                .height(24.dp)
+                .size(24.dp)
                 .clickable {
                     val intent = Intent(Intent.ACTION_VIEW, Uri.parse(url))
                     context.startActivity(intent)
@@ -91,9 +87,7 @@ fun Umkm_ECommerce(
 fun EcommerceButton(
     modifier: Modifier = Modifier,
     icon: Painter,
-    color: Color,
-
-    ) {
+) {
     Box(
         modifier = modifier
             .aspectRatio(1f)

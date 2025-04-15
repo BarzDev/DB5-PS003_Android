@@ -1,6 +1,6 @@
 package com.example.android_db5_ps003.data.remote.retrofit
 
-import com.example.android_db5_ps003.data.remote.response.UmkmItem
+import com.example.android_db5_ps003.data.remote.response.UmkmDetailResponse
 import com.example.android_db5_ps003.data.remote.response.UmkmResponse
 import retrofit2.Call
 import retrofit2.http.GET
@@ -18,7 +18,7 @@ interface ApiService {
     suspend fun getDataUmkm(): UmkmResponse
 
     @GET("api/umkm/{id}")
-    suspend fun getDetailUmkm(@Path("id") id: Int): UmkmItem
+    suspend fun getDetailUmkm(@Path("id") id: Int): UmkmDetailResponse
 
     @GET("api/wisata")
     fun getDataWisata(): Call<List<String>>

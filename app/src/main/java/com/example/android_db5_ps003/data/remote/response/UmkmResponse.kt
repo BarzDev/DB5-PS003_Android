@@ -6,6 +6,12 @@ data class UmkmResponse(
     val status: Int
 )
 
+data class UmkmDetailResponse(
+    val data: UmkmItem,
+    val message: String,
+    val status: Int
+)
+
 data class UmkmItem(
     val id: Int,
     val name: String,

@@ -1,5 +1,7 @@
 package com.example.android_db5_ps003.ui.components.umkm
 
+import android.content.Intent
+import android.net.Uri
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Arrangement
@@ -13,6 +15,7 @@ import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.rememberScrollState
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.foundation.verticalScroll
+import androidx.compose.material3.Button
 import androidx.compose.material3.HorizontalDivider
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Text
@@ -24,6 +27,8 @@ import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.res.stringResource
+import androidx.compose.ui.semantics.contentDescription
+import androidx.compose.ui.semantics.semantics
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.tooling.preview.Preview
@@ -44,9 +49,13 @@ fun Umkm_Detail(
     description: String,
     modifier: Modifier = Modifier,
 ) {
+    val context = LocalContext.current
     val painter = rememberAsyncImagePainter(
-        ImageRequest.Builder(LocalContext.current).data(image)
-            .placeholder(R.drawable.ic_refresh_black).error(R.drawable.ic_broken_image_black)
+        ImageRequest.Builder(LocalContext.current)
+            .data(image)
+            .size(200)
+            .placeholder(R.drawable.ic_refresh_black)
+            .error(R.drawable.ic_broken_image_black)
             .build()
     )
 
@@ -57,6 +66,7 @@ fun Umkm_Detail(
             modifier = Modifier
                 .verticalScroll(rememberScrollState())
                 .weight(1f)
+                .padding(bottom = 20.dp)
         ) {
             Box(
                 modifier = modifier
@@ -85,7 +95,8 @@ fun Umkm_Detail(
                 Text(
                     text = price,
                     color = MaterialTheme.colorScheme.secondary,
-                    style = MaterialTheme.typography.titleMedium
+                    style = MaterialTheme.typography.titleLarge,
+                    fontWeight = FontWeight.Bold
 
                 )
 
@@ -107,12 +118,19 @@ fun Umkm_Detail(
                 modifier = modifier.padding(horizontal = 20.dp),
                 color = MaterialTheme.colorScheme.primary,
             )
+            Spacer(modifier = modifier.height(10.dp))
+            Text(
+                modifier = Modifier
+                    .fillMaxWidth()
+                    .padding(horizontal = 20.dp),
+                text = stringResource(R.string.umkm_description_txt)
+            )
+
             Text(
                 modifier = Modifier
                     .fillMaxWidth()
                     .padding(horizontal = 20.dp, vertical = 10.dp),
                 text = description,
-                style = MaterialTheme.typography.bodyMedium,
                 textAlign = TextAlign.Justify,
                 lineHeight = 20.sp,
             )
@@ -127,23 +145,38 @@ fun Umkm_Detail(
                 text = stringResource(R.string.umkm_owner, owner),
                 modifier = modifier.padding(horizontal = 20.dp),
                 color = MaterialTheme.colorScheme.secondary,
-                style = MaterialTheme.typography.titleMedium
+                style = MaterialTheme.typography.bodyMedium
             )
-            Spacer(modifier = modifier.height(3.dp))
             Text(
                 text = stringResource(R.string.umkm_location, location),
                 modifier = modifier.padding(horizontal = 20.dp),
                 color = MaterialTheme.colorScheme.secondary,
-                style = MaterialTheme.typography.titleMedium
+                style = MaterialTheme.typography.bodyMedium
             )
-            Spacer(modifier = modifier.height(3.dp))
             Text(
                 text = stringResource(R.string.umkm_contact),
                 modifier = modifier.padding(horizontal = 20.dp),
                 color = MaterialTheme.colorScheme.secondary,
-                style = MaterialTheme.typography.titleMedium
+                style = MaterialTheme.typography.bodyMedium
             )
-
+        }
+        Column(
+            modifier = Modifier.padding(16.dp)
+        ) {
+            Button(
+                onClick = {
+                    val intent = Intent(Intent.ACTION_VIEW, Uri.parse(link))
+                    context.startActivity(intent)
+                },
+                modifier = modifier
+                    .fillMaxWidth()
+                    .height(40.dp)
+                    .semantics(mergeDescendants = true) {
+                        contentDescription = "Order Button"
+                    }
+            ) {
+                Text(text = stringResource(R.string.umkm_buy))
+            }
 
         }
     }

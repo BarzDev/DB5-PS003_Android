@@ -23,11 +23,9 @@ class UmkmCatalogueViewModel(private val repository: UmkmRepository) : ViewModel
             try {
                 val response = repository.fetchData()
                 _uiState.value = UiState.Success(response.data)
-//                Log.d("UMKM_CATALOGUE", "Success: ${response.data}")
             } catch (e: Exception) {
                 val msg = "Failed to get data"
                 _uiState.value = UiState.Error(msg)
-//                Log.e("UMKM_CATALOGUE", "Error: ${e.message}")
             }
         }
     }
