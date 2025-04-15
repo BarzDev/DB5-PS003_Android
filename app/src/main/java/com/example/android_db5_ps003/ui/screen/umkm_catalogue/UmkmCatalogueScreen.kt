@@ -10,16 +10,23 @@ import androidx.compose.foundation.lazy.grid.items
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.runtime.getValue
+import androidx.compose.runtime.mutableStateOf
+import androidx.compose.runtime.remember
+import androidx.compose.runtime.setValue
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.unit.dp
 import androidx.lifecycle.compose.collectAsStateWithLifecycle
 import androidx.lifecycle.viewmodel.compose.viewModel
+import com.example.android_db5_ps003.R
 import com.example.android_db5_ps003.data.remote.response.UmkmItem
 import com.example.android_db5_ps003.di.Injection
 import com.example.android_db5_ps003.ui.ViewModelFactory
 import com.example.android_db5_ps003.ui.common.UiState
+import com.example.android_db5_ps003.ui.components.EmptyComponent
 import com.example.android_db5_ps003.ui.components.ErrorHandlerComponent
 import com.example.android_db5_ps003.ui.components.LoadingComponent
+import com.example.android_db5_ps003.ui.components.SearchBar
 import com.example.android_db5_ps003.ui.components.umkm.Umkm_Card
 import com.example.android_db5_ps003.util.formatRupiah
 
@@ -32,6 +39,8 @@ fun UmkmCatalogueScreen(
     modifier: Modifier = Modifier,
 ) {
     val uiState by viewModel.uiState.collectAsStateWithLifecycle()
+    var query by remember { mutableStateOf("") }
+    val count by viewModel.count.collectAsStateWithLifecycle()
 
     LaunchedEffect(Unit) {
         viewModel.fetchUmkm()
@@ -43,15 +52,25 @@ fun UmkmCatalogueScreen(
         }
 
         is UiState.Success -> {
+            val filteredProducts = viewModel.searchProducts(query)
+
             Column(
                 modifier = modifier
                     .padding(horizontal = 8.dp)
             ) {
-                UmkmList(
-                    umkms = state.data,
-                    modifier = modifier,
-                    navigateToDetail = navigateToDetail
-                )
+                SearchBar(query = query, onQueryChange = { query = it }, count = count)
+
+                if (filteredProducts.isEmpty()) {
+                    EmptyComponent(msg = stringResource(R.string.data_not_found))
+                } else {
+                    UmkmList(
+                        umkms = filteredProducts,
+                        modifier = modifier,
+                        navigateToDetail = navigateToDetail
+                    )
+                }
+
+
             }
 
         }
