@@ -28,7 +28,7 @@ fun UmkmCatalogueScreen(
     viewModel: UmkmCatalogueViewModel = viewModel(
         factory = ViewModelFactory(Injection.provideUmkmRepository())
     ),
-    navigateToDetail: () -> Unit,
+    navigateToDetail: (Int) -> Unit,
     modifier: Modifier = Modifier,
 ) {
     val uiState by viewModel.uiState.collectAsStateWithLifecycle()
@@ -69,7 +69,7 @@ fun UmkmCatalogueScreen(
 fun UmkmList(
     umkms: List<UmkmItem>,
     modifier: Modifier = Modifier,
-    navigateToDetail: () -> Unit
+    navigateToDetail: (Int) -> Unit
 ) {
     LazyVerticalGrid(
         columns = GridCells.Fixed(2),
@@ -83,7 +83,7 @@ fun UmkmList(
                 image = umkm.img,
                 price = formatRupiah(umkm.price),
                 owner = umkm.owner,
-                modifier = Modifier.clickable { navigateToDetail() }
+                modifier = Modifier.clickable { navigateToDetail(umkm.id) }
             )
         }
     }

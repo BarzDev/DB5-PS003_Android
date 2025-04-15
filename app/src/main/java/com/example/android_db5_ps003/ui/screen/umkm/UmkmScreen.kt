@@ -20,10 +20,12 @@ import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.navigation.NavHostController
+import androidx.navigation.NavType
 import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
 import androidx.navigation.compose.currentBackStackEntryAsState
 import androidx.navigation.compose.rememberNavController
+import androidx.navigation.navArgument
 import com.example.android_db5_ps003.R
 import com.example.android_db5_ps003.ui.navigation.Screen
 import com.example.android_db5_ps003.ui.screen.umkm_catalogue.UmkmCatalogueScreen
@@ -45,11 +47,16 @@ fun UmkmScreen(
         ) {
             composable(Screen.UmkmCatalogue.route) {
                 UmkmCatalogueScreen(
-                    navigateToDetail = { navController.navigate(Screen.UmkmDetail.route) },
+                    navigateToDetail = { id ->
+                        navController.navigate(Screen.UmkmDetail.createRoute(id)) },
                 )
             }
-            composable(Screen.UmkmDetail.route) {
-                UmkmDetailScreen()
+            composable(
+                route =Screen.UmkmDetail.route,
+                arguments = listOf(navArgument("id") { type = NavType.IntType }),) {
+                UmkmDetailScreen(
+                    id = it.arguments?.getInt("id") ?: 0,
+                )
             }
         }
 
