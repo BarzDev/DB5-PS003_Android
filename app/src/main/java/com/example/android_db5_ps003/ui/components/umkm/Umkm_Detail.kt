@@ -89,7 +89,7 @@ fun Umkm_Detail(
 
                 )
 
-                Umkm_ECommerce()
+                Umkm_ECommerce(url = link)
 
             }
 
@@ -160,7 +160,7 @@ fun Umkm_DetailPreview() {
         image = "https://product1.jpg",
         owner = "fakhrul akbar",
         location = "Indonesia",
-        link = "https://product1.jpg",
+        link = "www.google.com",
         description = "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris."
     )
 }
