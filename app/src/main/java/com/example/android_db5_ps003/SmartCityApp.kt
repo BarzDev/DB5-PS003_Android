@@ -118,7 +118,7 @@ private fun BottomBar(
     }
 }
 
-@Preview(showBackground = true)
+@Preview(showBackground = true, showSystemUi = true)
 @Composable
 fun SmartCityAppPreview() {
     Android_DB5PS003Theme {
