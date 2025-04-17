@@ -12,9 +12,8 @@ import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
-import androidx.compose.foundation.rememberScrollState
+import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.foundation.shape.RoundedCornerShape
-import androidx.compose.foundation.verticalScroll
 import androidx.compose.material3.Button
 import androidx.compose.material3.HorizontalDivider
 import androidx.compose.material3.MaterialTheme
@@ -62,104 +61,120 @@ fun Umkm_Detail(
     Column(
         modifier = modifier
     ) {
-        Column(
+        LazyColumn(
             modifier = Modifier
-                .verticalScroll(rememberScrollState())
                 .weight(1f)
                 .padding(bottom = 20.dp)
         ) {
-            Box(
-                modifier = modifier
-                    .padding(10.dp)
-                    .clip(RoundedCornerShape(20.dp))
-            ) {
-                Image(
-                    painter = painter,
-                    contentDescription = null,
-                    contentScale = ContentScale.Fit,
+            item {
+                Box(
                     modifier = modifier
-                        .height(250.dp)
-                        .background(Color.White)
-                        .fillMaxWidth()
                         .padding(10.dp)
-                )
+                        .clip(RoundedCornerShape(20.dp))
+                ) {
+                    Image(
+                        painter = painter,
+                        contentDescription = null,
+                        contentScale = ContentScale.Fit,
+                        modifier = modifier
+                            .height(250.dp)
+                            .background(Color.White)
+                            .fillMaxWidth()
+                            .padding(10.dp)
+                    )
+                }
             }
 
-            Row(
-                modifier = modifier
-                    .padding(horizontal = 20.dp)
-                    .fillMaxWidth(),
-                verticalAlignment = Alignment.CenterVertically,
-                horizontalArrangement = Arrangement.SpaceBetween
-            ) {
+            item {
+                Row(
+                    modifier = modifier
+                        .padding(horizontal = 20.dp)
+                        .fillMaxWidth(),
+                    verticalAlignment = Alignment.CenterVertically,
+                    horizontalArrangement = Arrangement.SpaceBetween
+                ) {
+                    Text(
+                        text = price,
+                        color = MaterialTheme.colorScheme.secondary,
+                        style = MaterialTheme.typography.titleLarge,
+                        fontWeight = FontWeight.Bold
+                    )
+                    Umkm_ECommerce(url = link)
+                }
+            }
+
+            item { Spacer(modifier = modifier.height(10.dp)) }
+
+            item {
                 Text(
-                    text = price,
-                    color = MaterialTheme.colorScheme.secondary,
+                    modifier = modifier.padding(horizontal = 20.dp),
+                    text = name,
+                    color = MaterialTheme.colorScheme.primary,
                     style = MaterialTheme.typography.titleLarge,
                     fontWeight = FontWeight.Bold
-
                 )
-
-                Umkm_ECommerce(url = link)
-
             }
 
-            Spacer(modifier = modifier.height(10.dp))
-            Text(
-                modifier = modifier.padding(horizontal = 20.dp),
-                text = name,
-                color = MaterialTheme.colorScheme.primary,
-                style = MaterialTheme.typography.titleLarge,
-                fontWeight = FontWeight.Bold
+            item {
+                HorizontalDivider(
+                    modifier = modifier.padding(horizontal = 20.dp),
+                    color = MaterialTheme.colorScheme.primary,
+                )
+            }
 
-            )
+            item { Spacer(modifier = modifier.height(10.dp)) }
 
-            HorizontalDivider(
-                modifier = modifier.padding(horizontal = 20.dp),
-                color = MaterialTheme.colorScheme.primary,
-            )
-            Spacer(modifier = modifier.height(10.dp))
-            Text(
-                modifier = Modifier
-                    .fillMaxWidth()
-                    .padding(horizontal = 20.dp),
-                text = stringResource(R.string.umkm_description_txt)
-            )
+            item {
+                Text(
+                    modifier = Modifier
+                        .fillMaxWidth()
+                        .padding(horizontal = 20.dp),
+                    text = stringResource(R.string.umkm_description_txt)
+                )
+            }
 
-            Text(
-                modifier = Modifier
-                    .fillMaxWidth()
-                    .padding(horizontal = 20.dp, vertical = 10.dp),
-                text = description,
-                textAlign = TextAlign.Justify,
-                lineHeight = 20.sp,
-            )
-            HorizontalDivider(
-                modifier = modifier
-                    .padding(horizontal = 20.dp),
-                color = MaterialTheme.colorScheme.primary,
-            )
+            item {
+                Text(
+                    modifier = Modifier
+                        .fillMaxWidth()
+                        .padding(horizontal = 20.dp, vertical = 10.dp),
+                    text = description,
+                    textAlign = TextAlign.Justify,
+                    lineHeight = 20.sp,
+                )
+            }
 
-            Spacer(modifier = modifier.height(10.dp))
-            Text(
-                text = stringResource(R.string.umkm_owner, owner),
-                modifier = modifier.padding(horizontal = 20.dp),
-                color = MaterialTheme.colorScheme.secondary,
-                style = MaterialTheme.typography.bodyMedium
-            )
-            Text(
-                text = stringResource(R.string.umkm_location, location),
-                modifier = modifier.padding(horizontal = 20.dp),
-                color = MaterialTheme.colorScheme.secondary,
-                style = MaterialTheme.typography.bodyMedium
-            )
-            Text(
-                text = stringResource(R.string.umkm_contact),
-                modifier = modifier.padding(horizontal = 20.dp),
-                color = MaterialTheme.colorScheme.secondary,
-                style = MaterialTheme.typography.bodyMedium
-            )
+            item {
+                HorizontalDivider(
+                    modifier = modifier.padding(horizontal = 20.dp),
+                    color = MaterialTheme.colorScheme.primary,
+                )
+            }
+
+            item { Spacer(modifier = modifier.height(10.dp)) }
+
+            item {
+                Text(
+                    text = stringResource(R.string.umkm_owner, owner),
+                    modifier = modifier.padding(horizontal = 20.dp),
+                    color = MaterialTheme.colorScheme.secondary,
+                    style = MaterialTheme.typography.bodyMedium
+                )
+                Text(
+                    text = stringResource(R.string.umkm_location, location),
+                    modifier = modifier.padding(horizontal = 20.dp),
+                    color = MaterialTheme.colorScheme.secondary,
+                    style = MaterialTheme.typography.bodyMedium
+                )
+                Text(
+                    text = stringResource(R.string.umkm_contact),
+                    modifier = modifier.padding(horizontal = 20.dp),
+                    color = MaterialTheme.colorScheme.secondary,
+                    style = MaterialTheme.typography.bodyMedium
+                )
+            }
         }
+
         Column(
             modifier = Modifier.padding(16.dp)
         ) {
@@ -177,11 +192,9 @@ fun Umkm_Detail(
             ) {
                 Text(text = stringResource(R.string.umkm_buy))
             }
-
         }
+
     }
-
-
 }
 
 @Preview(showBackground = true)
