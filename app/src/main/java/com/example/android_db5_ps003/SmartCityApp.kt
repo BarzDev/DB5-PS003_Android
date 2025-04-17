@@ -50,15 +50,15 @@ fun SmartCityApp(
             modifier = Modifier.padding(innerPadding),
         ) {
             composable(Screen.Home.route) {
-                HomeScreen()
+                HomeScreen(
+                    navigateToNewsDetail = {  }
+                )
             }
             composable(Screen.Catalogue.route) {
                 CatalogueScreen()
             }
             composable(Screen.Emergency.route) {
-                NewsScreen(
-                    navigateToNewsDetail = {  },
-                )
+                EmergencyCallScreen()
             }
         }
     }

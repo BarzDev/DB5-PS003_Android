@@ -73,6 +73,7 @@ dependencies {
 
     implementation(libs.coil.compose)
     implementation(libs.androidx.lifecycle.viewmodel.compose)
+    implementation(libs.androidx.foundation)
 
     implementation(libs.androidx.room.runtime)
     ksp(libs.androidx.room.compiler)

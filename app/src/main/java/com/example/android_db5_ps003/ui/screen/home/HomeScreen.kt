@@ -1,23 +1,107 @@
 package com.example.android_db5_ps003.ui.screen.home
 
-import androidx.compose.foundation.layout.Box
-import androidx.compose.foundation.layout.fillMaxSize
-import androidx.compose.material3.Text
+import androidx.compose.foundation.layout.PaddingValues
+import androidx.compose.foundation.layout.padding
+import androidx.compose.foundation.lazy.LazyColumn
+import androidx.compose.foundation.lazy.LazyRow
+import androidx.compose.foundation.lazy.items
 import androidx.compose.runtime.Composable
-import androidx.compose.ui.Alignment
+import androidx.compose.runtime.LaunchedEffect
+import androidx.compose.runtime.collectAsState
+import androidx.compose.runtime.getValue
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.res.stringResource
+import androidx.compose.ui.unit.dp
+import androidx.lifecycle.viewmodel.compose.viewModel
 import com.example.android_db5_ps003.R
-
+import com.example.android_db5_ps003.data.model.BannerData
+import com.example.android_db5_ps003.data.model.toBannerData
+import com.example.android_db5_ps003.data.remote.response.NewsItem
+import com.example.android_db5_ps003.di.Injection
+import com.example.android_db5_ps003.di.NewsViewModelFactory
+import com.example.android_db5_ps003.ui.common.UiState
+import com.example.android_db5_ps003.ui.components.ItemsChevron
+import com.example.android_db5_ps003.ui.components.NewsBanner
+import com.example.android_db5_ps003.ui.components.NewsCardItem
 
 @Composable
 fun HomeScreen(
-    modifier: Modifier = Modifier
+    modifier: Modifier = Modifier,
+    viewModel: HomeViewModel = viewModel(
+        factory = NewsViewModelFactory(Injection.provideNewsRepository(LocalContext.current))
+    ),
+    navigateToNewsDetail: () -> Unit
 ) {
-    Box(
-        modifier = modifier.fillMaxSize(),
-        contentAlignment = Alignment.Center,
-    ) {
-        Text(stringResource(R.string.menu_home))
+    val uiState by viewModel.uiState.collectAsState()
+
+    LaunchedEffect(Unit) {
+        if (uiState is UiState.Loading) {
+            viewModel.getNewsDataForBanner()
+        }
+    }
+
+    when (uiState) {
+        is UiState.Loading -> {
+
+        }
+
+        is UiState.Error -> {
+
+        }
+
+        is UiState.Success -> {
+            val newsData = (uiState as UiState.Success).data
+            val bannerData = newsData
+                .shuffled()
+                .take(5)
+                .map { it.toBannerData() }
+            HomeContent(
+                banners = bannerData,
+                newsData = newsData.take(5)
+            )
+        }
+    }
+}
+
+@Composable
+fun HomeContent(
+    modifier: Modifier = Modifier,
+    banners: List<BannerData>,
+    newsData: List<NewsItem>,
+) {
+    LazyColumn {
+        item {
+            NewsBanner(
+                banners = banners
+            )
+        }
+        item {
+            ItemsChevron(
+                fieldName = stringResource(R.string.pelayanan_publik),
+                modifier = Modifier.padding(16.dp)
+            )
+            LazyRow {
+                // Item Pelayanan Publik
+            }
+        }
+
+        item {
+            ItemsChevron(
+                fieldName = stringResource(R.string.berita_terkini),
+                modifier = Modifier.padding(16.dp)
+            )
+            LazyRow(
+                contentPadding = PaddingValues(8.dp),
+            ) {
+                items(newsData, key = { it.id }) { list ->
+                    NewsCardItem(
+                        headlineText = list.title ?: "",
+                        urlImg = list.urlToImage ?: "",
+                        date = list.publishedAt ?: ""
+                    )
+                }
+            }
+        }
     }
 }

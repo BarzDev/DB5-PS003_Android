@@ -25,7 +25,7 @@ import com.example.android_db5_ps003.di.EmergencyViewModelFactory
 import com.example.android_db5_ps003.R
 import com.example.android_db5_ps003.data.model.EmergencyCalls
 import com.example.android_db5_ps003.di.Injection
-import com.example.android_db5_ps003.ui.components.EmergencyLists
+import com.example.android_db5_ps003.ui.components.Emergency_Public_ItemLayout
 import com.example.android_db5_ps003.ui.theme.Android_DB5PS003Theme
 
 @Composable
@@ -75,7 +75,7 @@ fun EmergencyScreenContent(
             horizontalArrangement = Arrangement.spacedBy(16.dp),
         ) {
             items(calls, key = { it.id }) { data ->
-                EmergencyLists(
+                Emergency_Public_ItemLayout(
                     modifier = Modifier
                         .clickable { navigateToCall(data.number) },
                     image = data.image,

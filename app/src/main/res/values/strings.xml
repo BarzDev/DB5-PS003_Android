@@ -7,6 +7,8 @@
     <string name="katalog_umkm">Katalog UMKM</string>
     <string name="katalog_wisata">Katalog Wisata</string>
     <string name="emergency_description">Klik pada icon yang ada dibawah ini untuk melakukan panggilan darurat</string>
+    <string name="pelayanan_publik">Pelayanan Publik</string>
+    <string name="berita_terkini">Berita Terkini</string>
     <string name="detail_umkm">Detail UMKM</string>
     <string name="umkm_owner_label">by %s</string>
     <string name="umkm_owner">Pemilik : \n%s</string>

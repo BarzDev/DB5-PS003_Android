@@ -24,7 +24,7 @@ object EmergencyCallsData {
         ),
         EmergencyCalls(
             id = 4,
-            name = "Dinas Perhubungan",
+            name = "Dishub",
             number = 911,
             image = R.drawable.ic_store
         ),
