@@ -13,23 +13,33 @@ import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
+import androidx.lifecycle.viewmodel.compose.viewModel
+import com.example.android_db5_ps003.di.EmergencyViewModelFactory
 import com.example.android_db5_ps003.R
 import com.example.android_db5_ps003.data.model.EmergencyCalls
+import com.example.android_db5_ps003.di.Injection
 import com.example.android_db5_ps003.ui.components.EmergencyLists
 import com.example.android_db5_ps003.ui.theme.Android_DB5PS003Theme
 
 @Composable
 fun EmergencyCallScreen(
     modifier: Modifier = Modifier,
+    viewModel: EmergencyCallViewModel = viewModel(
+        factory = EmergencyViewModelFactory(
+            repository = Injection.provideEmergencyRepository(LocalContext.current)
+        )
+    )
 ) {
+    val emergencyData = viewModel.getAllEmergencyData()
     EmergencyScreenContent(
-        calls = listOf(),
+        calls = emergencyData,
         navigateToCall = {}
     )
 }

@@ -1,5 +1,6 @@
 package com.example.android_db5_ps003.data.remote.retrofit
 
+import com.example.android_db5_ps003.data.remote.response.NewsItem
 import com.example.android_db5_ps003.data.remote.response.NewsResponse
 import com.example.android_db5_ps003.data.remote.response.UmkmDetailResponse
 import com.example.android_db5_ps003.data.remote.response.UmkmResponse

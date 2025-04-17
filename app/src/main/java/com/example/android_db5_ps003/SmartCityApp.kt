@@ -28,6 +28,7 @@ import com.example.android_db5_ps003.ui.navigation.Screen
 import com.example.android_db5_ps003.ui.screen.catalogue.CatalogueScreen
 import com.example.android_db5_ps003.ui.screen.emergency_call.EmergencyCallScreen
 import com.example.android_db5_ps003.ui.screen.home.HomeScreen
+import com.example.android_db5_ps003.ui.screen.news.NewsScreen
 import com.example.android_db5_ps003.ui.theme.Android_DB5PS003Theme
 
 @Composable
@@ -55,7 +56,9 @@ fun SmartCityApp(
                 CatalogueScreen()
             }
             composable(Screen.Emergency.route) {
-                EmergencyCallScreen()
+                NewsScreen(
+                    navigateToNewsDetail = {  },
+                )
             }
         }
     }
