@@ -1,6 +1,5 @@
 package com.example.android_db5_ps003.ui
 
-
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.ViewModelProvider
 import com.example.android_db5_ps003.data.repository.UmkmRepository
@@ -12,12 +11,16 @@ class ViewModelFactory(private val repository: UmkmRepository) :
 
     @Suppress("UNCHECKED_CAST")
     override fun <T : ViewModel> create(modelClass: Class<T>): T {
-        if (modelClass.isAssignableFrom(UmkmCatalogueViewModel::class.java)) {
-            return UmkmCatalogueViewModel(repository) as T
-        } else if (modelClass.isAssignableFrom(UmkmDetailViewModel::class.java)) {
-            return UmkmDetailViewModel(repository) as T
-        }
+        return when {
+            modelClass.isAssignableFrom(UmkmCatalogueViewModel::class.java) -> {
+                UmkmCatalogueViewModel(repository) as T
+            }
 
-        throw IllegalArgumentException("Unknown ViewModel class: " + modelClass.name)
+            modelClass.isAssignableFrom(UmkmDetailViewModel::class.java) -> {
+                UmkmDetailViewModel(repository) as T
+            }
+
+            else -> throw IllegalArgumentException("Unknown ViewModel class: " + modelClass.name)
+        }
     }
 }
