@@ -22,6 +22,19 @@ class TourismRepository(
         }
     }
 
+    fun getTourismDetail(id: Int) : Flow<UiState<Tourism>> {
+        return flow {
+            emit(UiState.Loading)
+            try {
+                val response = apiService.getTourismDetail(id)
+                val event = response.data
+                emit(UiState.Success(event))
+            } catch (e: Exception) {
+                emit(UiState.Error(e.message.toString()))
+            }
+        }
+    }
+
     companion object {
         @Volatile
         private var instance: TourismRepository? = null
