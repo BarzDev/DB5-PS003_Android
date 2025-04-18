@@ -57,4 +57,8 @@ class KulinerViewModel(private val apiService: ApiService) : ViewModel() {
     fun getKulinerByCategory(category: String): List<DataItem> {
         return _kulinerList.value.filter { it.category == category }
     }
+
+    fun getKulinerById(id: Int): DataItem? {
+        return _kulinerList.value.firstOrNull { it.id == id }
+    }
 }

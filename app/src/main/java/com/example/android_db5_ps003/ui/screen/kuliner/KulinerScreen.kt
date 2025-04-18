@@ -7,6 +7,9 @@ import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.foundation.lazy.LazyRow
 import androidx.compose.foundation.lazy.items
+import androidx.compose.material.icons.Icons
+import androidx.compose.material.icons.automirrored.filled.ArrowBack
+import androidx.compose.material.icons.filled.Search
 import androidx.compose.material3.*
 import androidx.compose.runtime.*
 import androidx.compose.ui.Alignment
@@ -31,7 +34,7 @@ import com.google.accompanist.pager.rememberPagerState
 import kotlinx.coroutines.launch
 import retrofit2.Response
 
-@OptIn(ExperimentalPagerApi::class)
+@OptIn(ExperimentalPagerApi::class, ExperimentalMaterial3Api::class)
 @Composable
 fun KulinerScreen(
     modifier: Modifier = Modifier,
@@ -45,57 +48,89 @@ fun KulinerScreen(
 
     val pagerState = rememberPagerState()
 
-    if (isLoading) {
-        Box(modifier = Modifier.fillMaxSize(), contentAlignment = Alignment.Center) {
-            CircularProgressIndicator()
+    Scaffold(
+        containerColor = Color.White,
+        topBar = {
+            CenterAlignedTopAppBar(
+                title = {
+                    Text(
+                        text = "Katalog Kuliner",
+                        style = MaterialTheme.typography.headlineSmall
+                    )
+                },
+                navigationIcon = {
+                    IconButton(onClick = {  }) {
+                        Icon(
+                            imageVector = Icons.AutoMirrored.Filled.ArrowBack,
+                            contentDescription = "Localized description",
+                            tint = Color.White
+                        )
+                    }
+                },
+                colors = TopAppBarDefaults.centerAlignedTopAppBarColors(
+                    containerColor = MaterialTheme.colorScheme.primary,
+                    titleContentColor = Color.White,
+                ),
+
+            )
         }
-        return
-    }
-
-    if (errorMessage != null) {
-        Box(modifier = Modifier.fillMaxSize(), contentAlignment = Alignment.Center) {
-            Text(text = errorMessage ?: "Unknown error")
-        }
-        return
-    }
-
-    Column(modifier = modifier.fillMaxSize()) {
-        // Featured Section
-        Text(
-            text = "Featured",
-            style = MaterialTheme.typography.titleLarge,
-            modifier = Modifier.padding(16.dp)
-        )
-
-        LazyRow(
-            contentPadding = PaddingValues(horizontal = 16.dp),
-            horizontalArrangement = Arrangement.spacedBy(8.dp)
+    ) { innerPadding ->
+        Column(
+            modifier = modifier
+                .fillMaxSize()
+                .padding(innerPadding)
         ) {
-            items(kulinerList.take(5)) { kuliner ->
-                FeaturedKulinerItem(kuliner = kuliner, onItemClick = onItemClick)
+            if (isLoading) {
+                Box(modifier = Modifier.fillMaxSize(), contentAlignment = Alignment.Center) {
+                    CircularProgressIndicator()
+                }
+                return@Column
             }
-        }
 
-        Spacer(modifier = Modifier.height(16.dp))
+            if (errorMessage != null) {
+                Box(modifier = Modifier.fillMaxSize(), contentAlignment = Alignment.Center) {
+                    Text(text = errorMessage ?: "Unknown error")
+                }
+                return@Column
+            }
 
-        // Categories with TabLayout
-        if (categories.isNotEmpty()) {
-            TabLayout(categories = categories, pagerState = pagerState)
+            // Featured Section
+            Text(
+                text = "Featured",
+                style = MaterialTheme.typography.titleLarge,
+                modifier = Modifier.padding(16.dp)
+            )
 
-            HorizontalPager(
-                count = categories.size,
-                state = pagerState,
-                modifier = Modifier.weight(1f)
-            ) { page ->
-                val category = categories[page]
-                val kulinerByCategory = viewModel.getKulinerByCategory(category)
+            LazyRow(
+                contentPadding = PaddingValues(horizontal = 16.dp),
+                horizontalArrangement = Arrangement.spacedBy(8.dp)
+            ) {
+                items(kulinerList.take(5)) { kuliner ->
+                    FeaturedKulinerItem(kuliner = kuliner, onItemClick = onItemClick)
+                }
+            }
 
-                LazyColumn(
-                    contentPadding = PaddingValues(16.dp),
-                    verticalArrangement = Arrangement.spacedBy(16.dp)
-                ) {
-                    items(kulinerByCategory) { kuliner ->
-                        KulinerItem(kuliner = kuliner, onItemClick = onItemClick)
+            Spacer(modifier = Modifier.height(16.dp))
+
+            // Categories with TabLayout
+            if (categories.isNotEmpty()) {
+                TabLayout(categories = categories, pagerState = pagerState)
+
+                HorizontalPager(
+                    count = categories.size,
+                    state = pagerState,
+                    modifier = Modifier.weight(1f)
+                ) { page ->
+                    val category = categories[page]
+                    val kulinerByCategory = viewModel.getKulinerByCategory(category)
+
+                    LazyColumn(
+                        contentPadding = PaddingValues(16.dp),
+                        verticalArrangement = Arrangement.spacedBy(16.dp)
+                    ) {
+                        items(kulinerByCategory) { kuliner ->
+                            KulinerItem(kuliner = kuliner, onItemClick = onItemClick)
+                        }
                     }
                 }
             }

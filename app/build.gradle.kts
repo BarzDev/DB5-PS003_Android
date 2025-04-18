@@ -71,6 +71,7 @@ dependencies {
 
     implementation(libs.androidx.navigation.runtime.ktx)
     implementation(libs.navigation.compose)
+    implementation (libs.androidx.lifecycle.viewmodel.compose)
 
     implementation (libs.accompanist.pager)
     implementation (libs.accompanist.pager.indicators)
