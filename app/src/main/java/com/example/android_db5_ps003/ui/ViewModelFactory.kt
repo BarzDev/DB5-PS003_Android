@@ -5,6 +5,7 @@ import androidx.lifecycle.ViewModelProvider
 import com.example.android_db5_ps003.data.repository.TourismRepository
 import com.example.android_db5_ps003.di.Injection
 import com.example.android_db5_ps003.ui.screen.tourism.TourismViewModel
+import com.example.android_db5_ps003.ui.screen.tourism_detail.TourismDetailViewModel
 
 class ViewModelFactory private constructor(private val tourismRepository: TourismRepository) :
     ViewModelProvider.NewInstanceFactory() {
@@ -12,6 +13,9 @@ class ViewModelFactory private constructor(private val tourismRepository: Touris
     override fun <T : ViewModel> create(modelClass: Class<T>): T {
         if (modelClass.isAssignableFrom(TourismViewModel::class.java)) {
             return TourismViewModel(tourismRepository) as T
+        }
+        else if (modelClass.isAssignableFrom(TourismDetailViewModel::class.java)) {
+            return TourismDetailViewModel(tourismRepository) as T
         }
         throw IllegalArgumentException("Unknown ViewModel class: " + modelClass.name)
     }
