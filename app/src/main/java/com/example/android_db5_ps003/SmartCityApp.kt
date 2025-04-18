@@ -28,6 +28,7 @@ import com.example.android_db5_ps003.ui.navigation.Screen
 import com.example.android_db5_ps003.ui.screen.catalogue.CatalogueScreen
 import com.example.android_db5_ps003.ui.screen.emergency_call.EmergencyCallScreen
 import com.example.android_db5_ps003.ui.screen.home.HomeScreen
+import com.example.android_db5_ps003.ui.screen.tourism.TourismScreen
 import com.example.android_db5_ps003.ui.theme.Android_DB5PS003Theme
 
 @Composable
@@ -35,11 +36,16 @@ fun SmartCityApp(
     modifier: Modifier = Modifier,
     navController: NavHostController = rememberNavController(),
 ) {
+    val navBackStackEntry by navController.currentBackStackEntryAsState()
+    val currentRoute = navBackStackEntry?.destination?.route
+
     Scaffold(
         bottomBar = {
-            BottomBar(
-                navController = navController,
-            )
+            if (currentRoute == Screen.Home.route || currentRoute == Screen.Catalogue.route || currentRoute == Screen.Emergency.route) {
+                BottomBar(
+                    navController = navController,
+                )
+            }
         },
         modifier = modifier
     ) { innerPadding ->
@@ -52,7 +58,18 @@ fun SmartCityApp(
                 HomeScreen()
             }
             composable(Screen.Catalogue.route) {
-                CatalogueScreen()
+                CatalogueScreen(
+                    navigateToTourism = {
+                        navController.navigate(Screen.Tourism.route)
+                    }
+                )
+            }
+            composable(Screen.Tourism.route) {
+                TourismScreen(
+                    navigateBack = {
+                        navController.navigateUp()
+                    }
+                )
             }
             composable(Screen.Emergency.route) {
                 EmergencyCallScreen()
