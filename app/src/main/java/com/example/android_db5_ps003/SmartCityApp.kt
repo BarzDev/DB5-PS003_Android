@@ -1,5 +1,8 @@
 package com.example.android_db5_ps003
 
+import android.content.Context
+import android.content.Intent
+import android.net.Uri
 import androidx.compose.foundation.layout.padding
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.Home
@@ -14,21 +17,26 @@ import androidx.compose.runtime.Composable
 import androidx.compose.runtime.getValue
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.vector.ImageVector
+import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.res.vectorResource
 import androidx.compose.ui.tooling.preview.Preview
+import androidx.core.net.toUri
 import androidx.navigation.NavGraph.Companion.findStartDestination
 import androidx.navigation.NavHostController
+import androidx.navigation.NavType
 import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
 import androidx.navigation.compose.currentBackStackEntryAsState
 import androidx.navigation.compose.rememberNavController
+import androidx.navigation.navArgument
 import com.example.android_db5_ps003.ui.navigation.NavigationItem
 import com.example.android_db5_ps003.ui.navigation.Screen
 import com.example.android_db5_ps003.ui.screen.catalogue.CatalogueScreen
 import com.example.android_db5_ps003.ui.screen.emergency_call.EmergencyCallScreen
 import com.example.android_db5_ps003.ui.screen.home.HomeScreen
 import com.example.android_db5_ps003.ui.screen.tourism.TourismScreen
+import com.example.android_db5_ps003.ui.screen.tourism_detail.TourismDetailScreen
 import com.example.android_db5_ps003.ui.theme.Android_DB5PS003Theme
 
 @Composable
@@ -68,6 +76,25 @@ fun SmartCityApp(
                 TourismScreen(
                     navigateBack = {
                         navController.navigateUp()
+                    },
+                    navigateToDetail = { tourismId ->
+                        navController.navigate(Screen.TourismDetail.createRoute(tourismId))
+                    }
+                )
+            }
+            composable(
+                route = Screen.TourismDetail.route,
+                arguments = listOf(navArgument("tourismId") { type = NavType.IntType }),
+            ) {
+                val id = it.arguments?.getInt("tourismId") ?: -1
+                val context = LocalContext.current
+                TourismDetailScreen(
+                    tourismId = id,
+                    navigateBack = {
+                        navController.navigateUp()
+                    },
+                    onNavigateButtonClicked = { url ->
+                        navigate(context, url)
                     }
                 )
             }
@@ -76,7 +103,13 @@ fun SmartCityApp(
             }
         }
     }
+}
 
+private fun navigate(context: Context, url: String) {
+    val webpage: Uri = url.toUri()
+    val intent = Intent(Intent.ACTION_VIEW, webpage)
+
+    context.startActivity(intent)
 }
 
 @Composable
