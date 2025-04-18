@@ -9,4 +9,7 @@
     <string name="tourism_image">Tourism Image</string>
     <string name="rating_star">Rating Star</string>
     <string name="tourism">Wisata</string>
+    <string name="tourism_detail">Detail Wisata</string>
+    <string name="description">Deskripsi</string>
+    <string name="navigate_here">Arahkan kesini</string>
 </resources>
