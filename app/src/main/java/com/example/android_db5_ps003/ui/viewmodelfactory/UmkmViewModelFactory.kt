@@ -1,4 +1,4 @@
-package com.example.android_db5_ps003.ui
+package com.example.android_db5_ps003.ui.viewmodelfactory
 
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.ViewModelProvider
@@ -6,7 +6,7 @@ import com.example.android_db5_ps003.data.repository.UmkmRepository
 import com.example.android_db5_ps003.ui.screen.umkm_catalogue.UmkmCatalogueViewModel
 import com.example.android_db5_ps003.ui.screen.umkm_detail.UmkmDetailViewModel
 
-class ViewModelFactory(private val repository: UmkmRepository) :
+class UmkmViewModelFactory(private val repository: UmkmRepository) :
     ViewModelProvider.NewInstanceFactory() {
 
     @Suppress("UNCHECKED_CAST")

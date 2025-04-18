@@ -7,7 +7,7 @@ import androidx.compose.ui.Modifier
 import androidx.lifecycle.compose.collectAsStateWithLifecycle
 import androidx.lifecycle.viewmodel.compose.viewModel
 import com.example.android_db5_ps003.di.Injection
-import com.example.android_db5_ps003.ui.ViewModelFactory
+import com.example.android_db5_ps003.ui.viewmodelfactory.UmkmViewModelFactory
 import com.example.android_db5_ps003.ui.common.UiState
 import com.example.android_db5_ps003.ui.components.ErrorHandlerComponent
 import com.example.android_db5_ps003.ui.components.LoadingComponent
@@ -18,7 +18,7 @@ import com.example.android_db5_ps003.util.formatRupiah
 fun UmkmDetailScreen(
     id: Int,
     viewModel: UmkmDetailViewModel = viewModel(
-        factory = ViewModelFactory(Injection.provideUmkmRepository())
+        factory = UmkmViewModelFactory(Injection.provideUmkmRepository())
     ),
     modifier: Modifier = Modifier
 ) {
