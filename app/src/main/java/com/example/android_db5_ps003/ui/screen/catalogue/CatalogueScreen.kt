@@ -1,7 +1,6 @@
 package com.example.android_db5_ps003.ui.screen.catalogue
 
 import androidx.compose.foundation.layout.Arrangement
-import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.fillMaxSize
@@ -30,7 +29,8 @@ import com.example.android_db5_ps003.R
 
 @Composable
 fun CatalogueScreen(
-    modifier: Modifier = Modifier
+    modifier: Modifier = Modifier,
+    navigateToTourism: () -> Unit,
 ) {
     Column(
         modifier = modifier
@@ -55,7 +55,7 @@ fun CatalogueScreen(
         CatalogueItem(
             icon = painterResource(id = R.drawable.ic_maps),
             text = stringResource(R.string.katalog_wisata),
-            onClick = { /* TODO */ }
+            onClick = { navigateToTourism() }
         )
     }
 }
@@ -94,5 +94,7 @@ fun CatalogueItem(
 @Composable
 @Preview(showBackground = true)
 fun CataloguePreview() {
-    CatalogueScreen()
+    CatalogueScreen(
+        navigateToTourism = { }
+    )
 }
