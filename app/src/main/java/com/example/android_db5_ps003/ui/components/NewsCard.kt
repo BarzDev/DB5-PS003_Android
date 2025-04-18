@@ -27,9 +27,11 @@ import com.example.android_db5_ps003.ui.theme.Android_DB5PS003Theme
 @Composable
 fun NewsCardItem(
     modifier: Modifier = Modifier,
+    id: Long,
     headlineText: String,
     urlImg: String,
-    date: String
+    date: String,
+    navigateToNewsDetail: (Long) -> Unit
 ) {
     Card(
         shape = RoundedCornerShape(16.dp),
@@ -43,7 +45,9 @@ fun NewsCardItem(
         modifier = modifier
             .size(height = Dp.Unspecified, width = 200.dp)
             .padding(horizontal = 4.dp)
-            .clickable {  }
+            .clickable {
+                navigateToNewsDetail(id)
+            }
     ) {
         Column(modifier = Modifier.padding(8.dp)) {
             AsyncImage(
@@ -74,6 +78,7 @@ fun NewsCardItem(
     }
 }
 
+/*
 @Preview(showBackground = true)
 @Composable
 private fun NewsCardItemPreview() {
@@ -81,7 +86,8 @@ private fun NewsCardItemPreview() {
         NewsCardItem(
             headlineText = "Kondisi Politik di Pulaunya, walaupun aslinya milik Yaman tapi dilirik UEA",
             urlImg = "https://www.edupac-id.com/wp-content/uploads/2023/05/kuliah-di-dubai-scaled.jpg",
-            date = "26 Maret 2025"
+            date = "26 Maret 2025",
+            navigateToNewsDetail = {}
         )
     }
-}
+}*/

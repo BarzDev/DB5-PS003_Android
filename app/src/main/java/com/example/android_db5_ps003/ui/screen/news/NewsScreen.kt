@@ -21,26 +21,32 @@ import com.example.android_db5_ps003.ui.theme.Android_DB5PS003Theme
 @Composable
 fun NewsScreen(
     modifier: Modifier = Modifier,
-    navigateToNewsDetail: () -> Unit,
+    navigateToNewsDetail: (Long) -> Unit,
     viewModel: NewsViewModel = viewModel(
-        factory = NewsViewModelFactory(Injection.provideNewsRepository(
-        LocalContext.current)))
+        factory = NewsViewModelFactory(
+            Injection.provideNewsRepository(
+                LocalContext.current
+            )
+        )
+    )
 ) {
     val uiState by viewModel.uiState.collectAsState(initial = UiState.Loading)
 
     LaunchedEffect(Unit) {
-        if(uiState is UiState.Loading) {
+        if (uiState is UiState.Loading) {
             viewModel.getNewsData()
         }
     }
 
-    when(uiState) {
+    when (uiState) {
         is UiState.Loading -> {
-            
+
         }
+
         is UiState.Error -> {
-            
+
         }
+
         is UiState.Success -> {
             val newsData = (uiState as UiState.Success).data
             NewsContent(
@@ -55,7 +61,7 @@ fun NewsScreen(
 fun NewsContent(
     modifier: Modifier = Modifier,
     newsList: List<NewsItem>,
-    navigateToNewsDetail: () -> Unit
+    navigateToNewsDetail: (Long) -> Unit
 ) {
     LazyColumn {
         items(newsList, key = { it.id }) { data ->
@@ -65,7 +71,7 @@ fun NewsContent(
                 shortDesc = data.description.toString(),
                 date = data.publishedAt.toString(),
                 modifier = Modifier
-                    .clickable(onClick = navigateToNewsDetail)
+                    .clickable(onClick = { navigateToNewsDetail(data.id.toLong()) })
             )
         }
     }

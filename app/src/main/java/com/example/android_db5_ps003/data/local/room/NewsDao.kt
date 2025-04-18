@@ -5,6 +5,7 @@ import androidx.room.Insert
 import androidx.room.OnConflictStrategy
 import androidx.room.Query
 import com.example.android_db5_ps003.data.local.entity.NewsEntity
+import com.example.android_db5_ps003.data.remote.response.NewsItem
 import kotlinx.coroutines.flow.Flow
 
 @Dao
@@ -14,4 +15,7 @@ interface NewsDao {
 
     @Insert(onConflict = OnConflictStrategy.IGNORE)
     suspend fun insertAll(news : List<NewsEntity>)
+
+    @Query("SELECT * FROM news WHERE id = :id")
+    fun getNewsById(id: Int) : Flow<List<NewsEntity>>
 }

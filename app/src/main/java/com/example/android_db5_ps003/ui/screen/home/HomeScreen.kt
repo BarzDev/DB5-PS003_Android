@@ -31,9 +31,10 @@ fun HomeScreen(
     viewModel: HomeViewModel = viewModel(
         factory = NewsViewModelFactory(Injection.provideNewsRepository(LocalContext.current))
     ),
-    navigateToNewsDetail: () -> Unit
+    navigateToNewsCatalogue: () -> Unit,
+    navigateToNewsDetail: (Long) -> Unit,
 ) {
-    val uiState by viewModel.uiState.collectAsState()
+    val uiState by viewModel.uiState.collectAsState(initial = UiState.Loading)
 
     LaunchedEffect(Unit) {
         if (uiState is UiState.Loading) {
@@ -42,13 +43,9 @@ fun HomeScreen(
     }
 
     when (uiState) {
-        is UiState.Loading -> {
+        is UiState.Loading -> {}
 
-        }
-
-        is UiState.Error -> {
-
-        }
+        is UiState.Error -> {}
 
         is UiState.Success -> {
             val newsData = (uiState as UiState.Success).data
@@ -58,7 +55,9 @@ fun HomeScreen(
                 .map { it.toBannerData() }
             HomeContent(
                 banners = bannerData,
-                newsData = newsData.take(5)
+                newsData = newsData.take(5),
+                navigateToNewsCatalogue = navigateToNewsCatalogue,
+                navigateToNewsDetail = navigateToNewsDetail,
             )
         }
     }
@@ -69,17 +68,21 @@ fun HomeContent(
     modifier: Modifier = Modifier,
     banners: List<BannerData>,
     newsData: List<NewsItem>,
+    navigateToNewsCatalogue: () -> Unit,
+    navigateToNewsDetail: (Long) -> Unit,
 ) {
     LazyColumn {
         item {
             NewsBanner(
-                banners = banners
+                banners = banners,
+                navigateToNewsDetail = navigateToNewsDetail
             )
         }
         item {
             ItemsChevron(
                 fieldName = stringResource(R.string.pelayanan_publik),
-                modifier = Modifier.padding(16.dp)
+                modifier = Modifier.padding(16.dp),
+                navigateToCatalogue = {}
             )
             LazyRow {
                 // Item Pelayanan Publik
@@ -89,7 +92,9 @@ fun HomeContent(
         item {
             ItemsChevron(
                 fieldName = stringResource(R.string.berita_terkini),
-                modifier = Modifier.padding(16.dp)
+                modifier = Modifier
+                    .padding(16.dp),
+                navigateToCatalogue = navigateToNewsCatalogue
             )
             LazyRow(
                 contentPadding = PaddingValues(8.dp),
@@ -98,7 +103,9 @@ fun HomeContent(
                     NewsCardItem(
                         headlineText = list.title ?: "",
                         urlImg = list.urlToImage ?: "",
-                        date = list.publishedAt ?: ""
+                        date = list.publishedAt ?: "",
+                        navigateToNewsDetail = navigateToNewsDetail,
+                        id = list.id.toLong()
                     )
                 }
             }

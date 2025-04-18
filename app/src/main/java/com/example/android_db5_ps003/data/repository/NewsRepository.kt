@@ -1,6 +1,5 @@
 package com.example.android_db5_ps003.data.repository
 
-import com.example.android_db5_ps003.data.local.entity.NewsEntity
 import com.example.android_db5_ps003.data.local.room.NewsDao
 import com.example.android_db5_ps003.data.model.toEntity
 import com.example.android_db5_ps003.data.model.toNewsItem
@@ -19,11 +18,15 @@ class NewsRepository(val dao: NewsDao) {
         dao.insertAll(entities)
     }
 
-    fun getNewsFromRoom() : Flow<List<NewsItem>> {
+    fun getNewsFromRoom(): Flow<List<NewsItem>> {
         return dao.getNews().map { list ->
             list.map { it.toNewsItem() }
         }
     }
 
-
+    fun getNewsById(id : Long) : Flow<List<NewsItem>> {
+        return dao.getNewsById(id.toInt()).map { item ->
+            item.map { it.toNewsItem() }
+        }
+    }
 }

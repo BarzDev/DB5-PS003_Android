@@ -19,15 +19,18 @@ import androidx.compose.ui.res.vectorResource
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.navigation.NavGraph.Companion.findStartDestination
 import androidx.navigation.NavHostController
+import androidx.navigation.NavType
 import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
 import androidx.navigation.compose.currentBackStackEntryAsState
 import androidx.navigation.compose.rememberNavController
+import androidx.navigation.navArgument
 import com.example.android_db5_ps003.ui.navigation.NavigationItem
 import com.example.android_db5_ps003.ui.navigation.Screen
 import com.example.android_db5_ps003.ui.screen.catalogue.CatalogueScreen
 import com.example.android_db5_ps003.ui.screen.emergency_call.EmergencyCallScreen
 import com.example.android_db5_ps003.ui.screen.home.HomeScreen
+import com.example.android_db5_ps003.ui.screen.news.NewsDetailScreen
 import com.example.android_db5_ps003.ui.screen.news.NewsScreen
 import com.example.android_db5_ps003.ui.theme.Android_DB5PS003Theme
 
@@ -36,11 +39,16 @@ fun SmartCityApp(
     modifier: Modifier = Modifier,
     navController: NavHostController = rememberNavController(),
 ) {
+    val navBackStackEntry by navController.currentBackStackEntryAsState()
+    val currentRoute = navBackStackEntry?.destination?.route
+
     Scaffold(
         bottomBar = {
-            BottomBar(
-                navController = navController,
-            )
+            if (currentRoute != Screen.News.route && currentRoute != Screen.NewsDetail.route) {
+                BottomBar(
+                    navController = navController,
+                )
+            }
         },
         modifier = modifier
     ) { innerPadding ->
@@ -51,7 +59,12 @@ fun SmartCityApp(
         ) {
             composable(Screen.Home.route) {
                 HomeScreen(
-                    navigateToNewsDetail = {  }
+                    navigateToNewsDetail = { id ->
+                        navController.navigate(Screen.NewsDetail.createRoute(id))
+                    },
+                    navigateToNewsCatalogue = {
+                        navController.navigate(Screen.News.route)
+                    }
                 )
             }
             composable(Screen.Catalogue.route) {
@@ -59,6 +72,23 @@ fun SmartCityApp(
             }
             composable(Screen.Emergency.route) {
                 EmergencyCallScreen()
+            }
+            composable(Screen.News.route) {
+                NewsScreen(
+                    navigateToNewsDetail = { id ->
+                        navController.navigate(Screen.NewsDetail.createRoute(id))
+                    },
+                )
+            }
+            composable(
+                route = Screen.NewsDetail.route,
+                arguments = listOf(navArgument("newsId") { type = NavType.LongType })
+            ) {
+                val id = it.arguments?.getLong("newsId") ?: -1L
+                NewsDetailScreen(
+                    navigatePop = { navController.navigateUp() },
+                    id = id
+                )
             }
         }
     }

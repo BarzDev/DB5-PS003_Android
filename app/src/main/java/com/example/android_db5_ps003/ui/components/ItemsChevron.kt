@@ -1,7 +1,6 @@
 package com.example.android_db5_ps003.ui.components
 
 import androidx.compose.foundation.clickable
-import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.padding
 import androidx.compose.material3.Icon
@@ -21,7 +20,8 @@ import com.example.android_db5_ps003.ui.theme.Android_DB5PS003Theme
 @Composable
 fun ItemsChevron(
     modifier: Modifier = Modifier,
-    fieldName : String
+    fieldName : String,
+    navigateToCatalogue : () -> Unit
     ) {
     Row(
         modifier = modifier,
@@ -38,7 +38,9 @@ fun ItemsChevron(
             tint = Color.Unspecified,
             modifier = Modifier
                 .padding(8.dp)
-                .clickable {  }
+                .clickable {
+                    navigateToCatalogue()
+                }
         )
     }
 }
@@ -48,7 +50,8 @@ fun ItemsChevron(
 private fun ItemsChevronPreview() {
     Android_DB5PS003Theme {
         ItemsChevron(
-            fieldName = "Pelayanan Publik"
+            fieldName = "Pelayanan Publik",
+            navigateToCatalogue = {}
         )
     }
 }

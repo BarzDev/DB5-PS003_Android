@@ -20,7 +20,8 @@ fun NewsItem.toEntity(): NewsEntity {
 fun NewsItem.toBannerData(): BannerData {
     return BannerData(
         urlImg = this.urlToImage ?: "",
-        headline = this.title ?: ""
+        headline = this.title ?: "",
+        id = this.id
     )
 }
 

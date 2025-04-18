@@ -1,12 +1,14 @@
 package com.example.android_db5_ps003.ui.screen.news
 
-import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.LaunchedEffect
+import androidx.compose.runtime.collectAsState
+import androidx.compose.runtime.getValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.layout.ContentScale
@@ -14,28 +16,54 @@ import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.tooling.preview.Preview
-import androidx.compose.ui.unit.Dp
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
+import androidx.lifecycle.viewmodel.compose.viewModel
 import coil.compose.AsyncImage
 import coil.request.ImageRequest
+import com.example.android_db5_ps003.di.Injection
+import com.example.android_db5_ps003.di.NewsViewModelFactory
+import com.example.android_db5_ps003.ui.common.UiState
 import com.example.android_db5_ps003.ui.theme.Android_DB5PS003Theme
 
 @Composable
 fun NewsDetailScreen(
     modifier: Modifier = Modifier,
-
+    navigatePop: () -> Unit,
+    id: Long,
+    viewModel: NewsDetailViewModel = viewModel(
+        factory = NewsViewModelFactory(Injection.provideNewsRepository(LocalContext.current))
+    )
 ) {
+    val uiState by viewModel.uiState.collectAsState(initial = UiState.Loading)
+    LaunchedEffect(Unit) {
+        if (uiState is UiState.Loading) {
+            viewModel.getNewsById(id)
+        }
+    }
 
+    when (uiState) {
+        is UiState.Error -> {}
+        is UiState.Loading -> {}
+        is UiState.Success -> {
+            val data = (uiState as UiState.Success).data
+            NewsDetailContent(
+                urlToImage = data[0].urlToImage.toString(),
+                headlineText = data[0].title.toString(),
+                date = data[0].publishedAt.toString(),
+                content = data[0].content.toString()
+            )
+        }
+    }
 }
 
 @Composable
 fun NewsDetailContent(
-    modifier : Modifier = Modifier,
-    urlToImage : String,
-    headlineText : String,
-    date : String,
-    content : String,
+    modifier: Modifier = Modifier,
+    urlToImage: String,
+    headlineText: String,
+    date: String,
+    content: String,
 ) {
     LazyColumn(
         modifier = modifier,

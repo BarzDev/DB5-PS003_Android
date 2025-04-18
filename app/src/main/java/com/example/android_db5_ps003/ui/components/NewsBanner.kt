@@ -1,5 +1,6 @@
 package com.example.android_db5_ps003.ui.components
 
+import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.fillMaxWidth
@@ -32,7 +33,8 @@ import com.example.android_db5_ps003.ui.theme.Android_DB5PS003Theme
 @Composable
 fun NewsBanner(
     modifier: Modifier = Modifier,
-    banners: List<BannerData>
+    banners: List<BannerData>,
+    navigateToNewsDetail : (Long) -> Unit
 ) {
     val pagerState = rememberPagerState { banners.size }
 
@@ -44,7 +46,9 @@ fun NewsBanner(
             state = pagerState,
             modifier = Modifier.fillMaxWidth(),
         ) { page ->
-            Box {
+            Box(
+                modifier = Modifier.clickable { navigateToNewsDetail(banners[page].id.toLong()) }
+            ) {
                 AsyncImage(
                     model = ImageRequest.Builder(LocalContext.current)
                         .data(banners[page].urlImg)
@@ -88,6 +92,7 @@ fun NewsBanner(
     }
 }
 
+/*
 @Preview(showBackground = true)
 @Composable
 fun NewsBannerPreview() {
@@ -117,4 +122,4 @@ fun NewsBannerPreview() {
             )
         )
     }
-}
+}*/
