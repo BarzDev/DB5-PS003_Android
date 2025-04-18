@@ -1,6 +1,7 @@
 package com.example.android_db5_ps003.ui.screen.tourism
 
 import android.widget.Toast
+import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.foundation.lazy.items
@@ -33,6 +34,7 @@ fun TourismScreen(
         factory = ViewModelFactory.getInstance()
     ),
     navigateBack: () -> Unit,
+    navigateToDetail: (Int) -> Unit,
 ) {
     viewModel.uiState.collectAsStateWithLifecycle().value.let { uiState ->
         when (uiState) {
@@ -45,7 +47,8 @@ fun TourismScreen(
                 TourismContent(
                     modifier = modifier,
                     tourism = uiState.data,
-                    navigateBack = navigateBack
+                    navigateBack = navigateBack,
+                    navigateToDetail = navigateToDetail
                 )
             }
 
@@ -62,6 +65,7 @@ fun TourismContent(
     modifier: Modifier,
     tourism: List<Tourism>,
     navigateBack: () -> Unit,
+    navigateToDetail: (Int) -> Unit,
 ) {
     Scaffold(
         topBar = {
@@ -93,6 +97,9 @@ fun TourismContent(
                     image = tourism.img,
                     name = tourism.name,
                     rating = tourism.rating.toString(),
+                    modifier = modifier.clickable(
+                        onClick = { navigateToDetail(tourism.id) }
+                    )
                 )
             }
         }
