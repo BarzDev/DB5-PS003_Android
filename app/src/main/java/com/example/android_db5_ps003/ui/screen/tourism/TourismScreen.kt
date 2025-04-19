@@ -2,7 +2,10 @@ package com.example.android_db5_ps003.ui.screen.tourism
 
 import android.widget.Toast
 import androidx.compose.foundation.clickable
+import androidx.compose.foundation.layout.Row
+import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.padding
+import androidx.compose.foundation.layout.width
 import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.foundation.lazy.items
 import androidx.compose.material.icons.Icons
@@ -14,10 +17,12 @@ import androidx.compose.material3.IconButton
 import androidx.compose.material3.Scaffold
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.getValue
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.font.FontWeight
+import androidx.compose.ui.unit.dp
 import androidx.lifecycle.compose.collectAsStateWithLifecycle
 import androidx.lifecycle.viewmodel.compose.viewModel
 import com.example.android_db5_ps003.R
@@ -25,6 +30,7 @@ import com.example.android_db5_ps003.data.remote.response.Tourism
 import com.example.android_db5_ps003.ui.ViewModelFactory
 import com.example.android_db5_ps003.ui.common.UiState
 import com.example.android_db5_ps003.ui.components.LoadingIndicator
+import com.example.android_db5_ps003.ui.components.SearchBar
 import com.example.android_db5_ps003.ui.components.TourismItem
 
 @Composable
@@ -36,6 +42,7 @@ fun TourismScreen(
     navigateBack: () -> Unit,
     navigateToDetail: (Int) -> Unit,
 ) {
+    val query by viewModel.query
     viewModel.uiState.collectAsStateWithLifecycle().value.let { uiState ->
         when (uiState) {
             is UiState.Loading -> {
@@ -48,7 +55,9 @@ fun TourismScreen(
                     modifier = modifier,
                     tourism = uiState.data,
                     navigateBack = navigateBack,
-                    navigateToDetail = navigateToDetail
+                    navigateToDetail = navigateToDetail,
+                    query = query,
+                    onQueryChange = viewModel::search
                 )
             }
 
@@ -66,6 +75,8 @@ fun TourismContent(
     tourism: List<Tourism>,
     navigateBack: () -> Unit,
     navigateToDetail: (Int) -> Unit,
+    query: String,
+    onQueryChange: (String) -> Unit,
 ) {
     Scaffold(
         topBar = {
@@ -92,6 +103,25 @@ fun TourismContent(
         LazyColumn(
             modifier = modifier.padding(innerPadding),
         ) {
+            item {
+                SearchBar(
+                    query = query,
+                    onQueryChange = onQueryChange
+                )
+                if (query.isNotEmpty()) {
+                    Row (
+                        modifier = modifier.padding(horizontal = 32.dp)
+                    ) {
+                        Text(
+                            text = tourism.size.toString(),
+                        )
+                        Spacer(modifier = modifier.width(4.dp))
+                        Text(
+                            text = stringResource(R.string.result),
+                        )
+                    }
+                }
+            }
             items(tourism, key = { it.id }) { tourism ->
                 TourismItem(
                     image = tourism.img,
