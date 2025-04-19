@@ -1,5 +1,7 @@
 package com.example.android_db5_ps003.ui.screen.tourism
 
+import androidx.compose.runtime.State
+import androidx.compose.runtime.mutableStateOf
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.example.android_db5_ps003.data.remote.response.Tourism
@@ -15,6 +17,9 @@ class TourismViewModel(private val repository: TourismRepository) : ViewModel() 
     val uiState: StateFlow<UiState<List<Tourism>>>
         get() = _uiState
 
+    private val _query = mutableStateOf("")
+    val query: State<String> get() = _query
+
     fun getAllTourism() {
         viewModelScope.launch {
             repository.getAllTourism()
@@ -23,6 +28,19 @@ class TourismViewModel(private val repository: TourismRepository) : ViewModel() 
                 }
                 .collect { events ->
                     _uiState.value = events
+                }
+        }
+    }
+
+    fun search(query: String) {
+        _query.value = query
+        viewModelScope.launch {
+            repository.searchTourism(query)
+                .catch {
+                    _uiState.value = UiState.Error(it.message.toString())
+                }
+                .collect { tourismList ->
+                    _uiState.value = UiState.Success(tourismList)
                 }
         }
     }
