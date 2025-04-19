@@ -5,10 +5,13 @@ import com.example.android_db5_ps003.data.remote.retrofit.ApiService
 import com.example.android_db5_ps003.ui.common.UiState
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.flow
+import kotlinx.coroutines.flow.flowOf
 
 class TourismRepository(
     private val apiService: ApiService
 ) {
+    private val listTourism = mutableListOf<Tourism>()
+
     fun getAllTourism() : Flow<UiState<List<Tourism>>> {
         return flow {
             emit(UiState.Loading)
@@ -16,6 +19,7 @@ class TourismRepository(
                 val response = apiService.getTourism()
                 val events = response.data
                 emit(UiState.Success(events))
+                listTourism.addAll(events)
             } catch (e: Exception) {
                 emit(UiState.Error(e.message.toString()))
             }
@@ -34,6 +38,15 @@ class TourismRepository(
             }
         }
     }
+
+    fun searchTourism(query: String) : Flow<List<Tourism>> {
+        return flowOf(
+            listTourism.filter {
+                it.name.contains(query, ignoreCase = true)
+            }
+        )
+    }
+
 
     companion object {
         @Volatile
