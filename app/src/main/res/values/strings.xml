@@ -12,4 +12,6 @@
     <string name="tourism_detail">Detail Wisata</string>
     <string name="description">Deskripsi</string>
     <string name="navigate_here">Arahkan kesini</string>
+    <string name="search_tourism">Cari Wisata</string>
+    <string name="result">hasil</string>
 </resources>
