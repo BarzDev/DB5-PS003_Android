@@ -18,6 +18,7 @@ import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.tooling.preview.Preview
@@ -25,6 +26,7 @@ import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import coil3.compose.AsyncImage
 import com.example.android_db5_ps003.R
+import androidx.core.graphics.toColorInt
 
 @Composable
 fun TourismItem(
@@ -62,7 +64,8 @@ fun TourismItem(
             Icon(
                 Icons.Filled.Star,
                 contentDescription = stringResource(R.string.rating_star),
-                modifier = modifier.size(16.dp)
+                modifier = modifier.size(16.dp),
+                tint = Color("#ffe234".toColorInt())
             )
             Spacer(modifier = modifier.width(4.dp))
             Text(
