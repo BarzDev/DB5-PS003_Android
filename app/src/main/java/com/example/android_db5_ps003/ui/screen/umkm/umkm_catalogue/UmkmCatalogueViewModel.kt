@@ -1,4 +1,4 @@
-package com.example.android_db5_ps003.ui.screen.umkm_catalogue
+package com.example.android_db5_ps003.ui.screen.umkm.umkm_catalogue
 
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope

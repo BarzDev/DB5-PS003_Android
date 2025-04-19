@@ -28,8 +28,8 @@ import androidx.navigation.compose.rememberNavController
 import androidx.navigation.navArgument
 import com.example.android_db5_ps003.R
 import com.example.android_db5_ps003.ui.navigation.Screen
-import com.example.android_db5_ps003.ui.screen.umkm_catalogue.UmkmCatalogueScreen
-import com.example.android_db5_ps003.ui.screen.umkm_detail.UmkmDetailScreen
+import com.example.android_db5_ps003.ui.screen.umkm.umkm_catalogue.UmkmCatalogueScreen
+import com.example.android_db5_ps003.ui.screen.umkm.umkm_detail.UmkmDetailScreen
 
 @Composable
 fun UmkmScreen(

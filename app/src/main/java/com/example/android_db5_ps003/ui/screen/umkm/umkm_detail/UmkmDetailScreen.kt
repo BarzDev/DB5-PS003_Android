@@ -1,4 +1,4 @@
-package com.example.android_db5_ps003.ui.screen.umkm_detail
+package com.example.android_db5_ps003.ui.screen.umkm.umkm_detail
 
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.LaunchedEffect
