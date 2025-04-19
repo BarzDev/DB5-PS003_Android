@@ -40,6 +40,7 @@ import androidx.compose.ui.tooling.preview.Devices
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
+import androidx.core.graphics.toColorInt
 import androidx.lifecycle.compose.collectAsStateWithLifecycle
 import androidx.lifecycle.viewmodel.compose.viewModel
 import coil3.compose.AsyncImage
@@ -149,7 +150,8 @@ fun TourismDetailContent(
                     Icon(
                         Icons.Filled.Star,
                         contentDescription = stringResource(R.string.rating_star),
-                        modifier = modifier.size(16.dp)
+                        modifier = modifier.size(16.dp),
+                        tint = Color("#ffe234".toColorInt())
                     )
                     Spacer(modifier = modifier.width(4.dp))
                     Text(
