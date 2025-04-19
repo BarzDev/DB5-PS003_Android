@@ -17,9 +17,9 @@ class TourismRepository(
             emit(UiState.Loading)
             try {
                 val response = apiService.getTourism()
-                val events = response.data
-                emit(UiState.Success(events))
-                listTourism.addAll(events)
+                val tourism = response.data
+                emit(UiState.Success(tourism))
+                listTourism.addAll(tourism)
             } catch (e: Exception) {
                 emit(UiState.Error(e.message.toString()))
             }
@@ -31,8 +31,8 @@ class TourismRepository(
             emit(UiState.Loading)
             try {
                 val response = apiService.getTourismDetail(id)
-                val event = response.data
-                emit(UiState.Success(event))
+                val tourism = response.data
+                emit(UiState.Success(tourism))
             } catch (e: Exception) {
                 emit(UiState.Error(e.message.toString()))
             }
