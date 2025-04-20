@@ -21,13 +21,13 @@ import androidx.lifecycle.viewmodel.compose.viewModel
 import com.example.android_db5_ps003.R
 import com.example.android_db5_ps003.data.remote.response.UmkmItem
 import com.example.android_db5_ps003.di.Injection
-import com.example.android_db5_ps003.ui.viewmodelfactory.UmkmViewModelFactory
 import com.example.android_db5_ps003.ui.common.UiState
 import com.example.android_db5_ps003.ui.components.EmptyComponent
 import com.example.android_db5_ps003.ui.components.ErrorHandlerComponent
 import com.example.android_db5_ps003.ui.components.LoadingComponent
 import com.example.android_db5_ps003.ui.components.SearchBar
 import com.example.android_db5_ps003.ui.components.umkm.UmkmCard
+import com.example.android_db5_ps003.ui.viewmodelfactory.UmkmViewModelFactory
 import com.example.android_db5_ps003.util.formatRupiah
 
 @Composable
