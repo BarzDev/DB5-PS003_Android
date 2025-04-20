@@ -27,7 +27,7 @@ import com.example.android_db5_ps003.ui.components.EmptyComponent
 import com.example.android_db5_ps003.ui.components.ErrorHandlerComponent
 import com.example.android_db5_ps003.ui.components.LoadingComponent
 import com.example.android_db5_ps003.ui.components.SearchBar
-import com.example.android_db5_ps003.ui.components.umkm.Umkm_Card
+import com.example.android_db5_ps003.ui.components.umkm.UmkmCard
 import com.example.android_db5_ps003.util.formatRupiah
 
 @Composable
@@ -97,7 +97,7 @@ fun UmkmList(
         modifier = modifier
     ) {
         items(umkms, key = { it.id }) { umkm ->
-            Umkm_Card(
+            UmkmCard(
                 title = umkm.name,
                 image = umkm.img,
                 price = formatRupiah(umkm.price),

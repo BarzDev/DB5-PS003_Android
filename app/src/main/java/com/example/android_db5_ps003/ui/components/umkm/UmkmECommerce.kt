@@ -26,7 +26,7 @@ import com.example.android_db5_ps003.R
 
 
 @Composable
-fun Umkm_ECommerce(
+fun UmkmECommerce(
     modifier: Modifier = Modifier,
     url: String
 ) {
@@ -106,7 +106,7 @@ fun EcommerceButton(
 @Preview(showBackground = true)
 @Composable
 fun Umkm_ECommercePreview() {
-    Umkm_ECommerce(
+    UmkmECommerce(
         url = "www.google.com"
     )
 }

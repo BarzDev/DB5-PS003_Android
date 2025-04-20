@@ -11,7 +11,7 @@ import com.example.android_db5_ps003.ui.viewmodelfactory.UmkmViewModelFactory
 import com.example.android_db5_ps003.ui.common.UiState
 import com.example.android_db5_ps003.ui.components.ErrorHandlerComponent
 import com.example.android_db5_ps003.ui.components.LoadingComponent
-import com.example.android_db5_ps003.ui.components.umkm.Umkm_Detail
+import com.example.android_db5_ps003.ui.components.umkm.UmkmDetail
 import com.example.android_db5_ps003.util.formatRupiah
 
 @Composable
@@ -34,7 +34,7 @@ fun UmkmDetailScreen(
         }
 
         is UiState.Success -> {
-            Umkm_Detail(
+            UmkmDetail(
                 name = state.data.name,
                 price = formatRupiah(state.data.price),
                 image = state.data.img,

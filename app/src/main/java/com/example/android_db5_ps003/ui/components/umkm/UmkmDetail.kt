@@ -38,7 +38,7 @@ import coil.request.ImageRequest
 import com.example.android_db5_ps003.R
 
 @Composable
-fun Umkm_Detail(
+fun UmkmDetail(
     name: String,
     price: String,
     image: String,
@@ -99,7 +99,7 @@ fun Umkm_Detail(
                         style = MaterialTheme.typography.titleLarge,
                         fontWeight = FontWeight.Bold
                     )
-                    Umkm_ECommerce(url = link)
+                    UmkmECommerce(url = link)
                 }
             }
 
@@ -200,7 +200,7 @@ fun Umkm_Detail(
 @Preview(showBackground = true)
 @Composable
 fun Umkm_DetailPreview() {
-    Umkm_Detail(
+    UmkmDetail(
         name = "Product 1",
         price = "Rp. 5.000",
         image = "https://product1.jpg",

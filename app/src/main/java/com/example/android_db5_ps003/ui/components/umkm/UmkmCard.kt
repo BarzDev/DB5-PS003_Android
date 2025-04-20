@@ -32,7 +32,7 @@ import coil.request.ImageRequest
 import com.example.android_db5_ps003.R
 
 @Composable
-fun Umkm_Card(
+fun UmkmCard(
     title: String,
     image: String,
     price: String,
@@ -106,7 +106,7 @@ fun Umkm_Card(
 @Composable
 @Preview(showBackground = true)
 fun UmkmCardPreview() {
-    Umkm_Card(
+    UmkmCard(
         title = "Product 1",
         image = "https://product1.jpg",
         price = "5000",
