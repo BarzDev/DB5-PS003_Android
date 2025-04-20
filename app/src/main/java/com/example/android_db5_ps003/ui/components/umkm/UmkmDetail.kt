@@ -1,7 +1,6 @@
 package com.example.android_db5_ps003.ui.components.umkm
 
-import android.content.Intent
-import android.net.Uri
+import android.widget.Toast
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Arrangement
@@ -36,6 +35,7 @@ import androidx.compose.ui.unit.sp
 import coil.compose.rememberAsyncImagePainter
 import coil.request.ImageRequest
 import com.example.android_db5_ps003.R
+import com.example.android_db5_ps003.util.generatePhoneNumber
 
 @Composable
 fun UmkmDetail(
@@ -49,6 +49,7 @@ fun UmkmDetail(
     modifier: Modifier = Modifier,
 ) {
     val context = LocalContext.current
+    val phone = generatePhoneNumber()
     val painter = rememberAsyncImagePainter(
         ImageRequest.Builder(LocalContext.current)
             .data(image)
@@ -157,20 +158,31 @@ fun UmkmDetail(
                 Text(
                     text = stringResource(R.string.umkm_owner, owner),
                     modifier = modifier.padding(horizontal = 20.dp),
-                    color = MaterialTheme.colorScheme.secondary,
                     style = MaterialTheme.typography.bodyMedium
                 )
+                HorizontalDivider(
+                    modifier = modifier.padding(horizontal = 20.dp, vertical = 5.dp),
+                    color = MaterialTheme.colorScheme.secondary,
+                )
+
                 Text(
                     text = stringResource(R.string.umkm_location, location),
                     modifier = modifier.padding(horizontal = 20.dp),
-                    color = MaterialTheme.colorScheme.secondary,
                     style = MaterialTheme.typography.bodyMedium
                 )
-                Text(
-                    text = stringResource(R.string.umkm_contact),
-                    modifier = modifier.padding(horizontal = 20.dp),
+                HorizontalDivider(
+                    modifier = modifier.padding(horizontal = 20.dp, vertical = 5.dp),
                     color = MaterialTheme.colorScheme.secondary,
+                )
+
+                Text(
+                    text = stringResource(R.string.umkm_contact, phone),
+                    modifier = modifier.padding(horizontal = 20.dp),
                     style = MaterialTheme.typography.bodyMedium
+                )
+                HorizontalDivider(
+                    modifier = modifier.padding(horizontal = 20.dp, vertical = 5.dp),
+                    color = MaterialTheme.colorScheme.secondary,
                 )
             }
         }
@@ -180,8 +192,10 @@ fun UmkmDetail(
         ) {
             Button(
                 onClick = {
-                    val intent = Intent(Intent.ACTION_VIEW, Uri.parse(link))
-                    context.startActivity(intent)
+                    val msg = "Berhasil membeli produk $name"
+                    Toast
+                        .makeText(context, msg, Toast.LENGTH_SHORT)
+                        .show()
                 },
                 modifier = modifier
                     .fillMaxWidth()
