@@ -22,7 +22,7 @@ import androidx.lifecycle.viewmodel.compose.viewModel
 import coil.compose.AsyncImage
 import coil.request.ImageRequest
 import com.example.android_db5_ps003.di.Injection
-import com.example.android_db5_ps003.di.NewsViewModelFactory
+import com.example.android_db5_ps003.ui.viewmodelfactory.NewsViewModelFactory
 import com.example.android_db5_ps003.ui.common.UiState
 import com.example.android_db5_ps003.ui.theme.Android_DB5PS003Theme
 

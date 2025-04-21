@@ -1,4 +1,4 @@
-package com.example.android_db5_ps003.di
+package com.example.android_db5_ps003.ui.viewmodelfactory
 
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.ViewModelProvider

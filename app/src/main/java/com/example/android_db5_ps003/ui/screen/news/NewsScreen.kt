@@ -13,7 +13,7 @@ import androidx.compose.ui.tooling.preview.Preview
 import androidx.lifecycle.viewmodel.compose.viewModel
 import com.example.android_db5_ps003.data.remote.response.NewsItem
 import com.example.android_db5_ps003.di.Injection
-import com.example.android_db5_ps003.di.NewsViewModelFactory
+import com.example.android_db5_ps003.ui.viewmodelfactory.NewsViewModelFactory
 import com.example.android_db5_ps003.ui.common.UiState
 import com.example.android_db5_ps003.ui.components.NewsListItem
 import com.example.android_db5_ps003.ui.theme.Android_DB5PS003Theme

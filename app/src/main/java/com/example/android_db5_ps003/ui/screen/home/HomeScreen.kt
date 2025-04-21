@@ -19,7 +19,7 @@ import com.example.android_db5_ps003.data.model.BannerData
 import com.example.android_db5_ps003.data.model.toBannerData
 import com.example.android_db5_ps003.data.remote.response.NewsItem
 import com.example.android_db5_ps003.di.Injection
-import com.example.android_db5_ps003.di.NewsViewModelFactory
+import com.example.android_db5_ps003.ui.viewmodelfactory.NewsViewModelFactory
 import com.example.android_db5_ps003.ui.common.UiState
 import com.example.android_db5_ps003.ui.components.ItemsChevron
 import com.example.android_db5_ps003.ui.components.NewsBanner
