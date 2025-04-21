@@ -12,7 +12,7 @@ object EmergencyCallsData {
         ),
         EmergencyCalls(
             id = 2,
-            name = "Pemadam Kebakaran",
+            name = "Damkar",
             number = 911,
             image = R.drawable.ic_damkar
         ),

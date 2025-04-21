@@ -93,7 +93,7 @@ fun NewsDetailContent(
                 fontWeight = FontWeight.SemiBold,
                 fontSize = 17.sp,
                 textAlign = TextAlign.Center,
-                modifier = Modifier.padding(8.dp)
+                modifier = Modifier.padding(vertical = 8.dp, horizontal = 16.dp)
             )
             Text(
                 text = content,
@@ -101,7 +101,7 @@ fun NewsDetailContent(
                 fontSize = 12.sp,
                 textAlign = TextAlign.Justify,
                 modifier = Modifier
-                    .padding(8.dp)
+                    .padding(vertical = 8.dp, horizontal = 16.dp)
             )
         }
     }
