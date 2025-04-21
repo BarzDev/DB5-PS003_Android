@@ -2,7 +2,7 @@
     <string name="app_name">Android_DB5-PS003</string>
     <string name="menu_home">Beranda</string>
     <string name="menu_catalogue">Katalog</string>
-    <string name="menu_emergency">Darurat</string>
+    <string name="menu_emergency">Panggilan Darurat</string>
     <string name="katalog_kuliner">Katalog Kuliner</string>
     <string name="katalog_umkm">Katalog UMKM</string>
     <string name="katalog_wisata">Katalog Wisata</string>
@@ -19,4 +19,6 @@
     <string name="umkm_buy">Beli Produk</string>
     <string name="search">Cari...</string>
     <string name="data_not_found">Tidak ada data</string>
+    <string name="smart_city_kebumen">Smart City Kebumen</string>
+    <string name="berita">Berita</string>
 </resources>

@@ -21,7 +21,6 @@ import com.example.android_db5_ps003.ui.theme.Android_DB5PS003Theme
 fun ItemsChevron(
     modifier: Modifier = Modifier,
     fieldName : String,
-    navigateToCatalogue : () -> Unit
     ) {
     Row(
         modifier = modifier,
@@ -38,9 +37,6 @@ fun ItemsChevron(
             tint = Color.Unspecified,
             modifier = Modifier
                 .padding(8.dp)
-                .clickable {
-                    navigateToCatalogue()
-                }
         )
     }
 }
@@ -51,7 +47,6 @@ private fun ItemsChevronPreview() {
     Android_DB5PS003Theme {
         ItemsChevron(
             fieldName = "Pelayanan Publik",
-            navigateToCatalogue = {}
         )
     }
 }

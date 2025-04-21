@@ -25,6 +25,7 @@ import androidx.navigation.compose.composable
 import androidx.navigation.compose.currentBackStackEntryAsState
 import androidx.navigation.compose.rememberNavController
 import androidx.navigation.navArgument
+import com.example.android_db5_ps003.ui.components.TopBar
 import com.example.android_db5_ps003.ui.navigation.NavigationItem
 import com.example.android_db5_ps003.ui.navigation.Screen
 import com.example.android_db5_ps003.ui.screen.catalogue.CatalogueScreen
@@ -43,6 +44,13 @@ fun SmartCityApp(
     val currentRoute = navBackStackEntry?.destination?.route
 
     Scaffold(
+        topBar = {
+            if (currentRoute != Screen.Catalogue.route && currentRoute != Screen.Emergency.route) {
+                TopBar(
+                    navController = navController
+                )
+            }
+        },
         bottomBar = {
             if (currentRoute != Screen.News.route && currentRoute != Screen.NewsDetail.route) {
                 BottomBar(
@@ -82,11 +90,10 @@ fun SmartCityApp(
             }
             composable(
                 route = Screen.NewsDetail.route,
-                arguments = listOf(navArgument("newsId") { type = NavType.LongType })
+                arguments = listOf(navArgument("newsId") { type = NavType.IntType })
             ) {
-                val id = it.arguments?.getLong("newsId") ?: -1L
+                val id: Int = it.arguments?.getInt("newsId") ?: -1
                 NewsDetailScreen(
-                    navigatePop = { navController.navigateUp() },
                     id = id
                 )
             }

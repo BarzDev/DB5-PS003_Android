@@ -1,4 +1,4 @@
-package com.example.android_db5_ps003.ui.components
+package com.example.android_db5_ps003.ui.components.news
 
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
@@ -20,6 +20,7 @@ import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import coil.compose.AsyncImage
 import coil.request.ImageRequest
+import com.example.android_db5_ps003.R
 import com.example.android_db5_ps003.ui.theme.Android_DB5PS003Theme
 
 @Composable
@@ -40,6 +41,7 @@ fun NewsListItem(
             model = ImageRequest.Builder(LocalContext.current)
                 .data(imageUrl)
                 .crossfade(true)
+                .placeholder(R.drawable.ic_refresh_black)
                 .build(),
             contentDescription = null,
             contentScale = ContentScale.Crop,

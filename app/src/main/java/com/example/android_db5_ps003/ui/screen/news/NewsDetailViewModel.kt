@@ -14,7 +14,7 @@ class NewsDetailViewModel(val repository: NewsRepository) : ViewModel() {
     private val _uiState : MutableStateFlow<UiState<List<NewsItem>>> = MutableStateFlow(UiState.Loading)
     val uiState : StateFlow<UiState<List<NewsItem>>> get() = _uiState
 
-    fun getNewsById(id : Long) {
+    fun getNewsById(id : Int) {
         viewModelScope.launch {
             repository.getNewsById(id)
                 .catch { e ->

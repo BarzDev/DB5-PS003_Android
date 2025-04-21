@@ -1,5 +1,6 @@
 package com.example.android_db5_ps003.ui.screen.home
 
+import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.PaddingValues
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.lazy.LazyColumn
@@ -22,8 +23,8 @@ import com.example.android_db5_ps003.di.Injection
 import com.example.android_db5_ps003.ui.viewmodelfactory.NewsViewModelFactory
 import com.example.android_db5_ps003.ui.common.UiState
 import com.example.android_db5_ps003.ui.components.ItemsChevron
-import com.example.android_db5_ps003.ui.components.NewsBanner
-import com.example.android_db5_ps003.ui.components.NewsCardItem
+import com.example.android_db5_ps003.ui.components.news.NewsBanner
+import com.example.android_db5_ps003.ui.components.news.NewsCardItem
 
 @Composable
 fun HomeScreen(
@@ -81,8 +82,8 @@ fun HomeContent(
         item {
             ItemsChevron(
                 fieldName = stringResource(R.string.pelayanan_publik),
-                modifier = Modifier.padding(16.dp),
-                navigateToCatalogue = {}
+                modifier = Modifier.padding(16.dp)
+                    .clickable {  }
             )
             LazyRow {
                 // Item Pelayanan Publik
@@ -93,8 +94,10 @@ fun HomeContent(
             ItemsChevron(
                 fieldName = stringResource(R.string.berita_terkini),
                 modifier = Modifier
-                    .padding(16.dp),
-                navigateToCatalogue = navigateToNewsCatalogue
+                    .padding(16.dp)
+                    .clickable {
+                        navigateToNewsCatalogue()
+                    },
             )
             LazyRow(
                 contentPadding = PaddingValues(8.dp),

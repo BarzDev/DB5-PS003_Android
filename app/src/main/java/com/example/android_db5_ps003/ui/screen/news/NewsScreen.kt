@@ -1,22 +1,32 @@
 package com.example.android_db5_ps003.ui.screen.news
 
+import androidx.compose.animation.core.tween
 import androidx.compose.foundation.clickable
+import androidx.compose.foundation.layout.Column
+import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.foundation.lazy.items
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.runtime.collectAsState
 import androidx.compose.runtime.getValue
+import androidx.compose.runtime.mutableStateOf
+import androidx.compose.runtime.remember
+import androidx.compose.runtime.setValue
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.tooling.preview.Preview
+import androidx.compose.ui.unit.dp
 import androidx.lifecycle.viewmodel.compose.viewModel
 import com.example.android_db5_ps003.data.remote.response.NewsItem
 import com.example.android_db5_ps003.di.Injection
-import com.example.android_db5_ps003.ui.viewmodelfactory.NewsViewModelFactory
 import com.example.android_db5_ps003.ui.common.UiState
-import com.example.android_db5_ps003.ui.components.NewsListItem
+import com.example.android_db5_ps003.ui.components.ErrorHandlerComponent
+import com.example.android_db5_ps003.ui.components.LoadingComponent
+import com.example.android_db5_ps003.ui.components.news.NewsListItem
+import com.example.android_db5_ps003.ui.components.SearchBar
 import com.example.android_db5_ps003.ui.theme.Android_DB5PS003Theme
+import com.example.android_db5_ps003.ui.viewmodelfactory.NewsViewModelFactory
 
 @Composable
 fun NewsScreen(
@@ -31,6 +41,8 @@ fun NewsScreen(
     )
 ) {
     val uiState by viewModel.uiState.collectAsState(initial = UiState.Loading)
+    var query by remember { mutableStateOf("") }
+    val count by viewModel.count.collectAsState()
 
     LaunchedEffect(Unit) {
         if (uiState is UiState.Loading) {
@@ -40,19 +52,36 @@ fun NewsScreen(
 
     when (uiState) {
         is UiState.Loading -> {
-
+            LoadingComponent()
         }
 
         is UiState.Error -> {
-
+            ErrorHandlerComponent(
+                errorMessage = (uiState as UiState.Error).errorMessage
+            ) {
+                viewModel.getNewsData()
+            }
         }
 
         is UiState.Success -> {
             val newsData = (uiState as UiState.Success).data
-            NewsContent(
-                newsList = newsData,
-                navigateToNewsDetail = navigateToNewsDetail
-            )
+            Column(
+                modifier = modifier
+                    .padding(horizontal = 8.dp)
+            ) {
+                SearchBar(
+                    query = query,
+                    count = count,
+                    onQueryChange = {
+                        query = it
+                        viewModel.search(query)
+                    },
+                )
+                NewsContent(
+                    newsList = newsData,
+                    navigateToNewsDetail = navigateToNewsDetail,
+                )
+            }
         }
     }
 }
@@ -61,7 +90,7 @@ fun NewsScreen(
 fun NewsContent(
     modifier: Modifier = Modifier,
     newsList: List<NewsItem>,
-    navigateToNewsDetail: (Long) -> Unit
+    navigateToNewsDetail: (Long) -> Unit,
 ) {
     LazyColumn {
         items(newsList, key = { it.id }) { data ->
@@ -70,7 +99,8 @@ fun NewsContent(
                 headlineText = data.title.toString(),
                 shortDesc = data.description.toString(),
                 date = data.publishedAt.toString(),
-                modifier = Modifier
+                modifier = modifier
+                    .animateItem(placementSpec = tween(durationMillis = 100))
                     .clickable(onClick = { navigateToNewsDetail(data.id.toLong()) })
             )
         }

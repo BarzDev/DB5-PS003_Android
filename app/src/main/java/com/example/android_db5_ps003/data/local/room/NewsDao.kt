@@ -18,4 +18,7 @@ interface NewsDao {
 
     @Query("SELECT * FROM news WHERE id = :id")
     fun getNewsById(id: Int) : Flow<List<NewsEntity>>
+
+    @Query("SELECT * FROM news WHERE LOWER(title) LIKE '%' || LOWER(:query) || '%'")
+    fun getSearchedNews(query : String) : Flow<List<NewsEntity>>
 }

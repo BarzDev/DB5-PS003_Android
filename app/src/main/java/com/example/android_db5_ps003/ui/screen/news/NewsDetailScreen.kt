@@ -29,8 +29,7 @@ import com.example.android_db5_ps003.ui.theme.Android_DB5PS003Theme
 @Composable
 fun NewsDetailScreen(
     modifier: Modifier = Modifier,
-    navigatePop: () -> Unit,
-    id: Long,
+    id: Int,
     viewModel: NewsDetailViewModel = viewModel(
         factory = NewsViewModelFactory(Injection.provideNewsRepository(LocalContext.current))
     )
@@ -51,7 +50,8 @@ fun NewsDetailScreen(
                 urlToImage = data[0].urlToImage.toString(),
                 headlineText = data[0].title.toString(),
                 date = data[0].publishedAt.toString(),
-                content = data[0].content.toString()
+                content = data[0].content.toString(),
+                modifier = modifier
             )
         }
     }

@@ -8,31 +8,31 @@ object EmergencyCallsData {
             id = 1,
             name = "Polisi",
             number = 911,
-            image = R.drawable.ic_store
+            image = R.drawable.ic_police
         ),
         EmergencyCalls(
             id = 2,
             name = "Pemadam Kebakaran",
             number = 911,
-            image = R.drawable.ic_store
+            image = R.drawable.ic_damkar
         ),
         EmergencyCalls(
             id = 3,
             name = "Ambulans",
             number = 911,
-            image = R.drawable.ic_store
+            image = R.drawable.ic_ambulance
         ),
         EmergencyCalls(
             id = 4,
             name = "Dishub",
             number = 911,
-            image = R.drawable.ic_store
+            image = R.drawable.ic_dishub
         ),
         EmergencyCalls(
             id = 5,
             name = "Basarnas",
             number = 911,
-            image = R.drawable.ic_store
+            image = R.drawable.ic_basarnas
         )
     )
 }

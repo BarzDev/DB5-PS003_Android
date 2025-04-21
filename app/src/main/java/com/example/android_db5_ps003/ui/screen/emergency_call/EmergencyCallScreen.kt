@@ -1,5 +1,9 @@
 package com.example.android_db5_ps003.ui.screen.emergency_call
 
+import android.content.Context
+import android.content.Intent
+import android.net.Uri
+import android.util.Log
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
@@ -21,26 +25,28 @@ import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import androidx.lifecycle.viewmodel.compose.viewModel
-import com.example.android_db5_ps003.ui.viewmodelfactory.EmergencyViewModelFactory
 import com.example.android_db5_ps003.R
 import com.example.android_db5_ps003.data.model.EmergencyCalls
 import com.example.android_db5_ps003.di.Injection
-import com.example.android_db5_ps003.ui.components.Emergency_Public_ItemLayout
+import com.example.android_db5_ps003.ui.components.emergency_call.Emergency_Public_ItemLayout
 import com.example.android_db5_ps003.ui.theme.Android_DB5PS003Theme
+import com.example.android_db5_ps003.ui.viewmodelfactory.EmergencyViewModelFactory
 
 @Composable
 fun EmergencyCallScreen(
     modifier: Modifier = Modifier,
+    context: Context = LocalContext.current,
     viewModel: EmergencyCallViewModel = viewModel(
         factory = EmergencyViewModelFactory(
-            repository = Injection.provideEmergencyRepository(LocalContext.current)
+            repository = Injection.provideEmergencyRepository(context)
         )
     )
 ) {
     val emergencyData = viewModel.getAllEmergencyData()
     EmergencyScreenContent(
         calls = emergencyData,
-        navigateToCall = {}
+        modifier = modifier,
+        context = context
     )
 }
 
@@ -48,11 +54,11 @@ fun EmergencyCallScreen(
 fun EmergencyScreenContent(
     modifier: Modifier = Modifier,
     calls: List<EmergencyCalls>,
-    navigateToCall: (Long) -> Unit
+    context: Context
 ) {
     Column(
         horizontalAlignment = Alignment.CenterHorizontally,
-        modifier = Modifier
+        modifier = modifier
             .fillMaxSize()
             .padding(top = 16.dp)
     ) {
@@ -77,59 +83,15 @@ fun EmergencyScreenContent(
             items(calls, key = { it.id }) { data ->
                 Emergency_Public_ItemLayout(
                     modifier = Modifier
-                        .clickable { navigateToCall(data.number) },
+                        .clickable {
+                            val serviceNumber = Uri.parse("tel:${data.number}")
+                            val intent = Intent(Intent.ACTION_DIAL, serviceNumber)
+                            context.startActivity(intent)
+                        },
                     image = data.image,
                     emergencyName = data.name
                 )
             }
         }
-    }
-}
-
-@Preview(showBackground = true, showSystemUi = true)
-@Composable
-fun EmergencyCallScreenPreview() {
-    Android_DB5PS003Theme {
-        EmergencyScreenContent(
-            calls = listOf(
-                EmergencyCalls(
-                    id = 1,
-                    name = "Basarnas",
-                    number = 911,
-                    image = R.drawable.ic_catalogue
-                ),
-                EmergencyCalls(
-                    id = 2,
-                    name = "Basarnas",
-                    number = 911,
-                    image = R.drawable.ic_catalogue
-                ),
-                EmergencyCalls(
-                    id = 3,
-                    name = "Basarnas",
-                    number = 911,
-                    image = R.drawable.ic_catalogue
-                ),
-                EmergencyCalls(
-                    id = 4,
-                    name = "Basarnas",
-                    number = 911,
-                    image = R.drawable.ic_catalogue
-                ),
-                EmergencyCalls(
-                    id = 5,
-                    name = "Basarnas",
-                    number = 911,
-                    image = R.drawable.ic_catalogue
-                ),
-                EmergencyCalls(
-                    id = 6,
-                    name = "Basarnas",
-                    number = 911,
-                    image = R.drawable.ic_catalogue
-                ),
-            ),
-            navigateToCall = {}
-        )
     }
 }
