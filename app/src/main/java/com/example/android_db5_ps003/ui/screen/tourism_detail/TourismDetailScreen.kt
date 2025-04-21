@@ -48,7 +48,7 @@ import com.example.android_db5_ps003.R
 import com.example.android_db5_ps003.data.remote.response.Tourism
 import com.example.android_db5_ps003.ui.ViewModelFactory
 import com.example.android_db5_ps003.ui.common.UiState
-import com.example.android_db5_ps003.ui.components.LoadingIndicator
+import com.example.android_db5_ps003.ui.components.Loading
 
 @Composable
 fun TourismDetailScreen(
@@ -64,7 +64,7 @@ fun TourismDetailScreen(
         when (uiState) {
             is UiState.Loading -> {
                 viewModel.getTourismDetail(tourismId)
-                LoadingIndicator()
+                Loading()
             }
 
             is UiState.Success -> {
