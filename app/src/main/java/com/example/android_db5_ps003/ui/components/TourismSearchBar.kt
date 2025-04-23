@@ -19,7 +19,7 @@ import com.example.android_db5_ps003.R
 
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
-fun SearchBar(
+fun TourismSearchBar(
     query: String,
     onQueryChange: (String) -> Unit,
     modifier: Modifier = Modifier
