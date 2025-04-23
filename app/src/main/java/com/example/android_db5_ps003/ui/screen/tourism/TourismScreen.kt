@@ -27,17 +27,17 @@ import androidx.lifecycle.compose.collectAsStateWithLifecycle
 import androidx.lifecycle.viewmodel.compose.viewModel
 import com.example.android_db5_ps003.R
 import com.example.android_db5_ps003.data.remote.response.Tourism
-import com.example.android_db5_ps003.ui.ViewModelFactory
+import com.example.android_db5_ps003.ui.TourismViewModelFactory
 import com.example.android_db5_ps003.ui.common.UiState
 import com.example.android_db5_ps003.ui.components.Loading
-import com.example.android_db5_ps003.ui.components.SearchBar
 import com.example.android_db5_ps003.ui.components.TourismItem
+import com.example.android_db5_ps003.ui.components.TourismSearchBar
 
 @Composable
 fun TourismScreen(
     modifier: Modifier = Modifier,
     viewModel: TourismViewModel = viewModel(
-        factory = ViewModelFactory.getInstance()
+        factory = TourismViewModelFactory.getInstance()
     ),
     navigateBack: () -> Unit,
     navigateToDetail: (Int) -> Unit,
@@ -104,7 +104,7 @@ fun TourismContent(
             modifier = modifier.padding(innerPadding),
         ) {
             item {
-                SearchBar(
+                TourismSearchBar(
                     query = query,
                     onQueryChange = onQueryChange
                 )

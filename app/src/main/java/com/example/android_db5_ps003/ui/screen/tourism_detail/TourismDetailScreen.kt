@@ -46,7 +46,7 @@ import androidx.lifecycle.viewmodel.compose.viewModel
 import coil3.compose.AsyncImage
 import com.example.android_db5_ps003.R
 import com.example.android_db5_ps003.data.remote.response.Tourism
-import com.example.android_db5_ps003.ui.ViewModelFactory
+import com.example.android_db5_ps003.ui.TourismViewModelFactory
 import com.example.android_db5_ps003.ui.common.UiState
 import com.example.android_db5_ps003.ui.components.Loading
 
@@ -54,7 +54,7 @@ import com.example.android_db5_ps003.ui.components.Loading
 fun TourismDetailScreen(
     modifier: Modifier = Modifier,
     viewModel: TourismDetailViewModel = viewModel(
-        factory = ViewModelFactory.getInstance()
+        factory = TourismViewModelFactory.getInstance()
     ),
     tourismId: Int,
     navigateBack: () -> Unit,
