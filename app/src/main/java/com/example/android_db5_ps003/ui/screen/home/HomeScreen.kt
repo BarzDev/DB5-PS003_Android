@@ -2,10 +2,13 @@ package com.example.android_db5_ps003.ui.screen.home
 
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.PaddingValues
+import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
+import androidx.compose.foundation.layout.width
 import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.foundation.lazy.LazyRow
 import androidx.compose.foundation.lazy.items
+import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.runtime.collectAsState
@@ -13,18 +16,21 @@ import androidx.compose.runtime.getValue
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.res.stringResource
+import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
+import androidx.compose.ui.unit.sp
 import androidx.lifecycle.viewmodel.compose.viewModel
 import com.example.android_db5_ps003.R
 import com.example.android_db5_ps003.data.model.BannerData
 import com.example.android_db5_ps003.data.model.toBannerData
 import com.example.android_db5_ps003.data.remote.response.NewsItem
 import com.example.android_db5_ps003.di.Injection
-import com.example.android_db5_ps003.ui.viewmodelfactory.NewsViewModelFactory
 import com.example.android_db5_ps003.ui.common.UiState
 import com.example.android_db5_ps003.ui.components.ItemsChevron
+import com.example.android_db5_ps003.ui.components.PublicServiceComponent
 import com.example.android_db5_ps003.ui.components.news.NewsBanner
 import com.example.android_db5_ps003.ui.components.news.NewsCardItem
+import com.example.android_db5_ps003.ui.viewmodelfactory.NewsViewModelFactory
 
 @Composable
 fun HomeScreen(
@@ -80,13 +86,17 @@ fun HomeContent(
             )
         }
         item {
-            ItemsChevron(
-                fieldName = stringResource(R.string.pelayanan_publik),
-                modifier = Modifier.padding(16.dp)
-                    .clickable {  }
+            Text(
+                text = stringResource(R.string.pelayanan_publik),
+                fontWeight = FontWeight.SemiBold,
+                fontSize = 16.sp,
+                modifier = Modifier
+                    .padding(16.dp)
             )
             LazyRow {
-                // Item Pelayanan Publik
+                item {
+                    PublicServiceComponent()
+                }
             }
         }
 

@@ -9,7 +9,7 @@
     <string name="emergency_description">Klik pada icon yang ada dibawah ini untuk melakukan panggilan darurat</string>
     <string name="pelayanan_publik">Pelayanan Publik</string>
     <string name="berita_terkini">Berita Terkini</string>
-    <string name="detail_umkm">Detail UMKM</string>
+    <string name="detail_umkm">Detail Produk</string>
     <string name="umkm_owner_label">by %s</string>
     <string name="umkm_owner">Pemilik : \n%s</string>
     <string name="umkm_location">Lokasi : \n%s</string>
@@ -22,4 +22,5 @@
     <string name="smart_city_kebumen">Smart City Kebumen</string>
     <string name="berita">Berita</string>
     <string name="app_logo">App Logo</string>
+    <string name="public_service">Terhubung ke layanan %s</string>
 </resources>
