@@ -7,7 +7,7 @@ import com.example.android_db5_ps003.di.Injection
 import com.example.android_db5_ps003.ui.screen.tourism.TourismViewModel
 import com.example.android_db5_ps003.ui.screen.tourism_detail.TourismDetailViewModel
 
-class ViewModelFactory private constructor(private val tourismRepository: TourismRepository) :
+class TourismViewModelFactory private constructor(private val tourismRepository: TourismRepository) :
     ViewModelProvider.NewInstanceFactory() {
     @Suppress("UNCHECKED_CAST")
     override fun <T : ViewModel> create(modelClass: Class<T>): T {
@@ -22,10 +22,10 @@ class ViewModelFactory private constructor(private val tourismRepository: Touris
 
     companion object {
         @Volatile
-        private var instance: ViewModelFactory? = null
-        fun getInstance(): ViewModelFactory =
+        private var instance: TourismViewModelFactory? = null
+        fun getInstance(): TourismViewModelFactory =
             instance ?: synchronized(this) {
-                instance ?: ViewModelFactory(Injection.provideTourismRepository())
+                instance ?: TourismViewModelFactory(Injection.provideTourismRepository())
             }.also { instance = it }
     }
 }
