@@ -24,6 +24,8 @@ import coil.request.ImageRequest
 import com.example.android_db5_ps003.di.Injection
 import com.example.android_db5_ps003.ui.viewmodelfactory.NewsViewModelFactory
 import com.example.android_db5_ps003.ui.common.UiState
+import com.example.android_db5_ps003.ui.components.ErrorHandlerComponent
+import com.example.android_db5_ps003.ui.components.LoadingComponent
 import com.example.android_db5_ps003.ui.theme.Android_DB5PS003Theme
 
 @Composable
@@ -42,8 +44,16 @@ fun NewsDetailScreen(
     }
 
     when (uiState) {
-        is UiState.Error -> {}
-        is UiState.Loading -> {}
+        is UiState.Error -> {
+            ErrorHandlerComponent(
+                errorMessage = (uiState as UiState.Error).errorMessage
+            ) {
+                viewModel.getNewsById(id)
+            }
+        }
+        is UiState.Loading -> {
+            LoadingComponent()
+        }
         is UiState.Success -> {
             val data = (uiState as UiState.Success).data
             NewsDetailContent(

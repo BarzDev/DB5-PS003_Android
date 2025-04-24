@@ -9,9 +9,6 @@ import kotlinx.coroutines.flow.StateFlow
 import kotlinx.coroutines.launch
 
 class EmergencyCallViewModel(private val repository: EmergencyRepository) : ViewModel() {
-    private val _emergency : MutableStateFlow<List<EmergencyCalls>>? = null
-    val emergency : StateFlow<List<EmergencyCalls>>? get() = _emergency
-
     fun getAllEmergencyData() : List<EmergencyCalls> {
         return repository.getEmergencyData()
     }

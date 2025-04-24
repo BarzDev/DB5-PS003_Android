@@ -26,7 +26,9 @@ import com.example.android_db5_ps003.data.model.toBannerData
 import com.example.android_db5_ps003.data.remote.response.NewsItem
 import com.example.android_db5_ps003.di.Injection
 import com.example.android_db5_ps003.ui.common.UiState
+import com.example.android_db5_ps003.ui.components.ErrorHandlerComponent
 import com.example.android_db5_ps003.ui.components.ItemsChevron
+import com.example.android_db5_ps003.ui.components.LoadingComponent
 import com.example.android_db5_ps003.ui.components.PublicServiceComponent
 import com.example.android_db5_ps003.ui.components.news.NewsBanner
 import com.example.android_db5_ps003.ui.components.news.NewsCardItem
@@ -50,9 +52,17 @@ fun HomeScreen(
     }
 
     when (uiState) {
-        is UiState.Loading -> {}
+        is UiState.Loading -> {
+            LoadingComponent()
+        }
 
-        is UiState.Error -> {}
+        is UiState.Error -> {
+            ErrorHandlerComponent(
+                errorMessage = (uiState as UiState.Error).errorMessage
+            ) {
+                viewModel.getNewsDataForBanner()
+            }
+        }
 
         is UiState.Success -> {
             val newsData = (uiState as UiState.Success).data
@@ -65,6 +75,7 @@ fun HomeScreen(
                 newsData = newsData.take(5),
                 navigateToNewsCatalogue = navigateToNewsCatalogue,
                 navigateToNewsDetail = navigateToNewsDetail,
+                modifier = modifier
             )
         }
     }
@@ -78,7 +89,7 @@ fun HomeContent(
     navigateToNewsCatalogue: () -> Unit,
     navigateToNewsDetail: (Long) -> Unit,
 ) {
-    LazyColumn {
+    LazyColumn(modifier = modifier) {
         item {
             NewsBanner(
                 banners = banners,
@@ -95,7 +106,9 @@ fun HomeContent(
             )
             LazyRow {
                 item {
-                    PublicServiceComponent()
+                    PublicServiceComponent(
+                        modifier = Modifier.padding(horizontal = 16.dp)
+                    )
                 }
             }
         }
