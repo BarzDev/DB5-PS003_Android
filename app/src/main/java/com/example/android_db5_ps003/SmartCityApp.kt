@@ -59,11 +59,6 @@ fun SmartCityApp(
             }
         },
         bottomBar = {
-            if (currentRoute != Screen.News.route && currentRoute != Screen.NewsDetail.route) {
-                BottomBar(
-                    navController = navController,
-                )
-            }
             if (currentRoute == Screen.Home.route || currentRoute == Screen.Catalogue.route || currentRoute == Screen.Emergency.route) {
                 BottomBar(
                     navController = navController,
@@ -96,9 +91,6 @@ fun SmartCityApp(
             }
             composable(Screen.Tourism.route) {
                 TourismScreen(
-                    navigateBack = {
-                        navController.navigateUp()
-                    },
                     navigateToDetail = { tourismId ->
                         navController.navigate(Screen.TourismDetail.createRoute(tourismId))
                     }
@@ -112,9 +104,6 @@ fun SmartCityApp(
                 val context = LocalContext.current
                 TourismDetailScreen(
                     tourismId = id,
-                    navigateBack = {
-                        navController.navigateUp()
-                    },
                     onNavigateButtonClicked = { url ->
                         navigate(context, url)
                     }
