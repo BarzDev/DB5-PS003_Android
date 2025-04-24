@@ -15,15 +15,11 @@ import androidx.compose.foundation.rememberScrollState
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.foundation.verticalScroll
 import androidx.compose.material.icons.Icons
-import androidx.compose.material.icons.automirrored.filled.ArrowBack
 import androidx.compose.material.icons.automirrored.filled.ArrowForward
 import androidx.compose.material.icons.filled.Star
 import androidx.compose.material3.Button
-import androidx.compose.material3.CenterAlignedTopAppBar
 import androidx.compose.material3.ExperimentalMaterial3Api
 import androidx.compose.material3.Icon
-import androidx.compose.material3.IconButton
-import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Scaffold
 import androidx.compose.material3.Text
 import androidx.compose.material3.TopAppBarDefaults
@@ -44,12 +40,12 @@ import androidx.compose.ui.unit.sp
 import androidx.core.graphics.toColorInt
 import androidx.lifecycle.compose.collectAsStateWithLifecycle
 import androidx.lifecycle.viewmodel.compose.viewModel
-import coil3.compose.AsyncImage
+import coil.compose.AsyncImage
 import com.example.android_db5_ps003.R
 import com.example.android_db5_ps003.data.remote.response.Tourism
 import com.example.android_db5_ps003.ui.TourismViewModelFactory
 import com.example.android_db5_ps003.ui.common.UiState
-import com.example.android_db5_ps003.ui.components.Loading
+import com.example.android_db5_ps003.ui.components.LoadingComponent
 
 @Composable
 fun TourismDetailScreen(
@@ -58,21 +54,19 @@ fun TourismDetailScreen(
         factory = TourismViewModelFactory.getInstance()
     ),
     tourismId: Int,
-    navigateBack: () -> Unit,
     onNavigateButtonClicked: (String) -> Unit
 ) {
     viewModel.uiState.collectAsStateWithLifecycle().value.let { uiState ->
         when (uiState) {
             is UiState.Loading -> {
                 viewModel.getTourismDetail(tourismId)
-                Loading()
+                LoadingComponent()
             }
 
             is UiState.Success -> {
                 TourismDetailContent(
                     modifier = modifier,
                     tourism = uiState.data,
-                    navigateBack = navigateBack,
                     onNavigateButtonClicked = onNavigateButtonClicked
                 )
             }
@@ -89,38 +83,12 @@ fun TourismDetailScreen(
 fun TourismDetailContent(
     modifier: Modifier,
     tourism: Tourism,
-    navigateBack: () -> Unit,
     onNavigateButtonClicked: (String) -> Unit
 ) {
     val scrollBehavior = TopAppBarDefaults.enterAlwaysScrollBehavior()
 
     Scaffold(
         modifier = modifier.nestedScroll(scrollBehavior.nestedScrollConnection),
-        topBar = {
-            CenterAlignedTopAppBar(
-                title = {
-                    Text(
-                        text = stringResource(R.string.tourism_detail),
-                        fontWeight = FontWeight.Bold
-                    )
-                },
-                navigationIcon = {
-                    IconButton(
-                        onClick = { navigateBack() }
-                    ) {
-                        Icon(
-                            imageVector = Icons.AutoMirrored.Filled.ArrowBack,
-                            contentDescription = null
-                        )
-                    }
-                },
-                colors = TopAppBarDefaults.centerAlignedTopAppBarColors(
-                    containerColor = MaterialTheme.colorScheme.primary,
-                    titleContentColor = MaterialTheme.colorScheme.onPrimary,
-                    navigationIconContentColor = MaterialTheme.colorScheme.onPrimary
-                )
-            )
-        }
     ) {
         innerPadding ->
         Column(
@@ -231,7 +199,6 @@ fun TourismDetailContentPreview() {
             rating = 4.5,
             link = "https://via.placeholder.com/600x400"
         ),
-        navigateBack = {  },
         onNavigateButtonClicked = {  }
     )
 }
