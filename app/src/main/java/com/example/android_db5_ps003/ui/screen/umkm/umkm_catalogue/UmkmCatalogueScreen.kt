@@ -54,20 +54,24 @@ fun UmkmCatalogueScreen(
         is UiState.Success -> {
             val filteredProducts = viewModel.searchProducts(query)
 
-            Column(
-                modifier = modifier
-                    .padding(horizontal = 8.dp)
-            ) {
-                SearchBar(query = query, onQueryChange = { query = it }, count = count)
+            Column(modifier = modifier) {
+                SearchBar(
+                    query = query,
+                    onQueryChange = { query = it },
+                    count = count,
+                    placeholder = "UMKM"
+                )
 
                 if (filteredProducts.isEmpty()) {
                     EmptyComponent(msg = stringResource(R.string.data_not_found))
                 } else {
                     UmkmList(
                         umkms = filteredProducts,
-                        modifier = modifier,
-                        navigateToDetail = navigateToDetail
-                    )
+                        modifier = modifier
+                            .padding(horizontal = 8.dp),
+                        navigateToDetail = navigateToDetail,
+
+                        )
                 }
 
 

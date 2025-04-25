@@ -17,7 +17,7 @@
     <string name="umkm_linked">Terhubung ke %s</string>
     <string name="umkm_description_txt">Deskripsi :</string>
     <string name="umkm_buy">Beli Produk</string>
-    <string name="search">Cari…</string>
+    <string name="search">Cari %s</string>
     <string name="data_not_found">Tidak ada data</string>
     <string name="smart_city_kebumen">Smart City Kebumen</string>
     <string name="berita">Berita</string>

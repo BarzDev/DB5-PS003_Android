@@ -66,12 +66,12 @@ fun NewsScreen(
         is UiState.Success -> {
             val newsData = (uiState as UiState.Success).data
             Column(
-                modifier = modifier
-                    .padding(horizontal = 8.dp)
+
             ) {
                 SearchBar(
                     query = query,
                     count = count,
+                    placeholder = "Berita",
                     onQueryChange = {
                         query = it
                         viewModel.search(query)
@@ -80,6 +80,8 @@ fun NewsScreen(
                 NewsContent(
                     newsList = newsData,
                     navigateToNewsDetail = navigateToNewsDetail,
+                    modifier = modifier
+                        .padding(horizontal = 8.dp)
                 )
             }
         }
