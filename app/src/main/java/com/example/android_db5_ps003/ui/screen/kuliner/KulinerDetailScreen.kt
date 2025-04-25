@@ -6,8 +6,6 @@ import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.rememberScrollState
 import androidx.compose.foundation.verticalScroll
 import androidx.compose.material.icons.Icons
-import androidx.compose.material.icons.automirrored.filled.ArrowBack
-import androidx.compose.material.icons.filled.Build
 import androidx.compose.material.icons.filled.LocationOn
 import androidx.compose.material3.*
 import androidx.compose.runtime.*
@@ -32,7 +30,6 @@ import java.util.Locale
 @Composable
 fun KulinerDetailScreen(
     kulinerId: Int,
-    onBackClick: () -> Unit,
     viewModel: KulinerViewModel = viewModel(
         factory = KulinerViewModelFactory(
             Injection.provideKulinerRepository(
@@ -46,7 +43,7 @@ fun KulinerDetailScreen(
     val kuliner = kulinerList.firstOrNull { it.id == kulinerId }
 
     Scaffold(
-        containerColor = Color.White,
+//        containerColor = Color.White,
     ) { innerPadding ->
         Box(
             modifier = Modifier
@@ -155,8 +152,7 @@ fun KulinerDetailContent(
                     text = kuliner.name ?: "",
                     style = MaterialTheme.typography.headlineMedium,
                     fontWeight = FontWeight.Bold,
-                    modifier = Modifier.weight(1f),
-                    color = Color.Black
+                    modifier = Modifier.weight(1f)
                 )
 
                 Text(
@@ -189,9 +185,7 @@ fun KulinerDetailContent(
                     Spacer(modifier = Modifier.width(8.dp))
                     Text(
                         text = kuliner.location ?: "",
-                        style = MaterialTheme.typography.bodyLarge.copy(
-                            color = Color.Black
-                        ),
+                        style = MaterialTheme.typography.bodyLarge,
                         modifier = Modifier.align(Alignment.CenterVertically)
                     )
                 }
@@ -208,9 +202,7 @@ fun KulinerDetailContent(
                     Spacer(modifier = Modifier.width(8.dp))
                     Text(
                         text = kuliner.category ?: "",
-                        style = MaterialTheme.typography.bodyLarge.copy(
-                            color = Color.Black
-                        ),
+                        style = MaterialTheme.typography.bodyLarge
                     )
                 }
             }
@@ -227,13 +219,11 @@ fun KulinerDetailContent(
                 style = MaterialTheme.typography.titleLarge,
                 fontWeight = FontWeight.Bold,
                 modifier = Modifier.padding(bottom = 8.dp),
-                color = Color.Black
             )
             Text(
                 text = kuliner.description ?: "No description available",
                 style = MaterialTheme.typography.bodyLarge,
                 textAlign = TextAlign.Justify,
-                color = Color.Black,
                 modifier = Modifier.padding(bottom = 16.dp)
             )
 
@@ -242,7 +232,6 @@ fun KulinerDetailContent(
                 style = MaterialTheme.typography.titleLarge,
                 fontWeight = FontWeight.Bold,
                 modifier = Modifier.padding(bottom = 8.dp),
-                color = Color.Black,
             )
 
             Surface(

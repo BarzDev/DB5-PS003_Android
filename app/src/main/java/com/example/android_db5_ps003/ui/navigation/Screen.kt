@@ -4,6 +4,10 @@ sealed class Screen(val route: String) {
     data object Splash : Screen("splash")
     data object Home : Screen("home")
     data object Catalogue : Screen("catalogue")
+    data object Tourism : Screen("catalogue/tourism")
+    data object TourismDetail : Screen("catalogue/tourism/{tourismId}") {
+        fun createRoute(tourismId: Int) = "catalogue/tourism/$tourismId"
+    }
     data object Emergency : Screen("emergency")
     data object News : Screen("news")
     data object NewsDetail : Screen("news/{newsId}") {

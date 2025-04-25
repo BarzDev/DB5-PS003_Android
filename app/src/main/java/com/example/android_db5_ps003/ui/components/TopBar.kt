@@ -36,8 +36,12 @@ fun TopBar(
         Screen.Home.route -> stringResource(R.string.smart_city_kebumen)
         Screen.News.route -> stringResource(R.string.berita_terkini)
         Screen.NewsDetail.route -> stringResource(R.string.berita)
+        Screen.Tourism.route -> stringResource(R.string.tourism)
+        Screen.TourismDetail.route -> stringResource(R.string.tourism_detail)
         Screen.Kuliner.route -> stringResource(R.string.katalog_kuliner)
         Screen.KulinerDetail.route -> stringResource(R.string.detail_kuliner)
+        Screen.Tourism.route -> stringResource(R.string.tourism)
+        Screen.TourismDetail.route -> stringResource(R.string.tourism_detail)
         else -> stringResource(R.string.app_name)
     }
 

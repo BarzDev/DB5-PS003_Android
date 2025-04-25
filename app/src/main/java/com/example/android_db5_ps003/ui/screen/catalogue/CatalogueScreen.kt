@@ -36,7 +36,9 @@ import com.example.android_db5_ps003.ui.screen.umkm.UmkmActivity
 @Composable
 fun CatalogueScreen(
     modifier: Modifier = Modifier,
-    navController: NavHostController? = null
+    navController: NavHostController? = null,
+    navigateToKuliner: () -> Unit = { navController?.navigate(Screen.Kuliner.route) },
+    navigateToTourism: () -> Unit,
 ) {
     val context = LocalContext.current
 
@@ -53,15 +55,7 @@ fun CatalogueScreen(
         CatalogueItem(
             icon = painterResource(id = R.drawable.ic_food),
             text = stringResource(R.string.katalog_kuliner),
-            onClick = {
-                navController?.navigate(Screen.Kuliner.route) {
-                    popUpTo(navController.graph.findStartDestination().id) {
-                        saveState = true
-                    }
-                    launchSingleTop = true
-                    restoreState = true
-                }
-            }
+            onClick = navigateToKuliner
         )
         CatalogueItem(
             icon = painterResource(id = R.drawable.ic_store),
@@ -74,7 +68,7 @@ fun CatalogueScreen(
         CatalogueItem(
             icon = painterResource(id = R.drawable.ic_maps),
             text = stringResource(R.string.katalog_wisata),
-            onClick = { /* TODO */ }
+            onClick = { navigateToTourism() }
         )
     }
 }
@@ -113,5 +107,7 @@ fun CatalogueItem(
 @Composable
 @Preview(showBackground = true)
 fun CataloguePreview() {
-    CatalogueScreen()
+    CatalogueScreen(
+        navigateToTourism = { }
+    )
 }

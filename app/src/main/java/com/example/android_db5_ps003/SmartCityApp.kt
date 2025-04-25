@@ -1,5 +1,8 @@
 package com.example.android_db5_ps003
 
+import android.content.Context
+import android.content.Intent
+import android.net.Uri
 import androidx.compose.foundation.layout.padding
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.Home
@@ -14,9 +17,11 @@ import androidx.compose.runtime.Composable
 import androidx.compose.runtime.getValue
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.vector.ImageVector
+import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.res.vectorResource
 import androidx.compose.ui.tooling.preview.Preview
+import androidx.core.net.toUri
 import androidx.navigation.NavGraph.Companion.findStartDestination
 import androidx.navigation.NavHostController
 import androidx.navigation.NavType
@@ -35,6 +40,8 @@ import com.example.android_db5_ps003.ui.screen.kuliner.KulinerDetailScreen
 import com.example.android_db5_ps003.ui.screen.kuliner.KulinerScreen
 import com.example.android_db5_ps003.ui.screen.news.NewsDetailScreen
 import com.example.android_db5_ps003.ui.screen.news.NewsScreen
+import com.example.android_db5_ps003.ui.screen.tourism.TourismScreen
+import com.example.android_db5_ps003.ui.screen.tourism_detail.TourismDetailScreen
 import com.example.android_db5_ps003.ui.theme.Android_DB5PS003Theme
 
 @Composable
@@ -54,8 +61,7 @@ fun SmartCityApp(
             }
         },
         bottomBar = {
-            if (currentRoute != Screen.News.route && currentRoute != Screen.NewsDetail.route &&
-                currentRoute != Screen.KulinerDetail.route && currentRoute != Screen.Kuliner.route) {
+            if (currentRoute == Screen.Home.route || currentRoute == Screen.Catalogue.route || currentRoute == Screen.Emergency.route) {
                 BottomBar(
                     navController = navController,
                 )
@@ -79,7 +85,41 @@ fun SmartCityApp(
                 )
             }
             composable(Screen.Catalogue.route) {
-                CatalogueScreen(navController = navController)
+                CatalogueScreen(
+                    navController = navController,
+                    navigateToKuliner = {
+                        navController.navigate(Screen.Kuliner.route) {
+                            popUpTo(navController.graph.findStartDestination().id) {
+                                saveState = true
+                            }
+                            launchSingleTop = true
+                            restoreState = true
+                        }
+                    },
+                    navigateToTourism = {
+                        navController.navigate(Screen.Tourism.route)
+                    }
+                )
+            }
+            composable(Screen.Tourism.route) {
+                TourismScreen(
+                    navigateToDetail = { tourismId ->
+                        navController.navigate(Screen.TourismDetail.createRoute(tourismId))
+                    }
+                )
+            }
+            composable(
+                route = Screen.TourismDetail.route,
+                arguments = listOf(navArgument("tourismId") { type = NavType.IntType }),
+            ) {
+                val id = it.arguments?.getInt("tourismId") ?: -1
+                val context = LocalContext.current
+                TourismDetailScreen(
+                    tourismId = id,
+                    onNavigateButtonClicked = { url ->
+                        navigate(context, url)
+                    }
+                )
             }
             composable(Screen.Emergency.route) {
                 EmergencyCallScreen()
@@ -91,6 +131,20 @@ fun SmartCityApp(
                     },
                 )
             }
+            composable(Screen.Kuliner.route) {
+                KulinerScreen(
+                    navController = navController
+                )
+            }
+            composable(
+                route = Screen.KulinerDetail.route,
+                arguments = listOf(navArgument("id") { type = NavType.IntType })
+            ) { backStackEntry ->
+                val id = backStackEntry.arguments?.getInt("id") ?: 0
+                KulinerDetailScreen(
+                    kulinerId = id
+                )
+            }
             composable(
                 route = Screen.NewsDetail.route,
                 arguments = listOf(navArgument("newsId") { type = NavType.IntType })
@@ -100,25 +154,15 @@ fun SmartCityApp(
                     id = id
                 )
             }
-            composable(Screen.Kuliner.route) {
-                KulinerScreen(
-                    navController = navController,
-                    onItemClick = { id -> navController.navigate(Screen.KulinerDetail.createRoute(id)) }
-                )
-            }
-            composable(
-                route = Screen.KulinerDetail.route,
-                arguments = listOf(navArgument("id") { type = NavType.IntType })
-            ) { backStackEntry ->
-                val id = backStackEntry.arguments?.getInt("id") ?: 0
-                KulinerDetailScreen(
-                    kulinerId = id,
-                    onBackClick = { navController.popBackStack() }
-                )
-            }
         }
     }
+}
 
+private fun navigate(context: Context, url: String) {
+    val webpage: Uri = url.toUri()
+    val intent = Intent(Intent.ACTION_VIEW, webpage)
+
+    context.startActivity(intent)
 }
 
 @Composable

@@ -9,7 +9,7 @@ import com.example.android_db5_ps003.data.repository.KulinerRepository
 import com.example.android_db5_ps003.data.repository.NewsRepository
 import com.example.android_db5_ps003.data.repository.UmkmRepository
 import com.example.android_db5_ps003.ui.screen.kuliner.KulinerViewModel
-import com.example.android_db5_ps003.ui.viewmodelfactory.KulinerViewModelFactory
+import com.example.android_db5_ps003.data.repository.TourismRepository
 
 object Injection {
     fun provideEmergencyRepository(context: Context): EmergencyRepository {
@@ -36,5 +36,10 @@ object Injection {
     fun provideKulinerViewModel(context: Context): KulinerViewModel {
         val repository = provideKulinerRepository(provideApiService())
         return KulinerViewModel(repository)
+    }
+
+    fun provideTourismRepository(): TourismRepository {
+        val apiService = ApiConfig.getApiService()
+        return TourismRepository.getInstance(apiService)
     }
 }
