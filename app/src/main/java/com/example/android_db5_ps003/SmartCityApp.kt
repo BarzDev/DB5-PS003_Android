@@ -31,6 +31,8 @@ import com.example.android_db5_ps003.ui.navigation.Screen
 import com.example.android_db5_ps003.ui.screen.catalogue.CatalogueScreen
 import com.example.android_db5_ps003.ui.screen.emergency_call.EmergencyCallScreen
 import com.example.android_db5_ps003.ui.screen.home.HomeScreen
+import com.example.android_db5_ps003.ui.screen.kuliner.KulinerDetailScreen
+import com.example.android_db5_ps003.ui.screen.kuliner.KulinerScreen
 import com.example.android_db5_ps003.ui.screen.news.NewsDetailScreen
 import com.example.android_db5_ps003.ui.screen.news.NewsScreen
 import com.example.android_db5_ps003.ui.theme.Android_DB5PS003Theme
@@ -52,7 +54,8 @@ fun SmartCityApp(
             }
         },
         bottomBar = {
-            if (currentRoute != Screen.News.route && currentRoute != Screen.NewsDetail.route) {
+            if (currentRoute != Screen.News.route && currentRoute != Screen.NewsDetail.route &&
+                currentRoute != Screen.KulinerDetail.route && currentRoute != Screen.Kuliner.route) {
                 BottomBar(
                     navController = navController,
                 )
@@ -76,7 +79,7 @@ fun SmartCityApp(
                 )
             }
             composable(Screen.Catalogue.route) {
-                CatalogueScreen()
+                CatalogueScreen(navController = navController)
             }
             composable(Screen.Emergency.route) {
                 EmergencyCallScreen()
@@ -95,6 +98,22 @@ fun SmartCityApp(
                 val id: Int = it.arguments?.getInt("newsId") ?: -1
                 NewsDetailScreen(
                     id = id
+                )
+            }
+            composable(Screen.Kuliner.route) {
+                KulinerScreen(
+                    navController = navController,
+                    onItemClick = { id -> navController.navigate(Screen.KulinerDetail.createRoute(id)) }
+                )
+            }
+            composable(
+                route = Screen.KulinerDetail.route,
+                arguments = listOf(navArgument("id") { type = NavType.IntType })
+            ) { backStackEntry ->
+                val id = backStackEntry.arguments?.getInt("id") ?: 0
+                KulinerDetailScreen(
+                    kulinerId = id,
+                    onBackClick = { navController.popBackStack() }
                 )
             }
         }

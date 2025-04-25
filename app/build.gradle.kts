@@ -44,6 +44,7 @@ android {
 }
 
 dependencies {
+
     implementation(libs.androidx.core.ktx)
     implementation(libs.androidx.lifecycle.runtime.ktx)
     implementation(libs.androidx.activity.compose)
@@ -77,4 +78,9 @@ dependencies {
 
     implementation(libs.androidx.room.runtime)
     ksp(libs.androidx.room.compiler)
+
+    implementation (libs.accompanist.pager)
+    implementation (libs.accompanist.pager.indicators)
+
+    implementation(libs.coil.gif)
 }

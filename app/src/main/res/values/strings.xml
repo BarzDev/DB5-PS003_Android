@@ -23,4 +23,8 @@
     <string name="berita">Berita</string>
     <string name="app_logo">App Logo</string>
     <string name="public_service">Terhubung ke layanan %s</string>
+    <string name="detail_kuliner">Detail Kuliner</string>
+    <string name="smart_part">Smart </string>
+    <string name="city_part">City</string>
+    <string name="kebumen_part"> Kebumen</string>
 </resources>

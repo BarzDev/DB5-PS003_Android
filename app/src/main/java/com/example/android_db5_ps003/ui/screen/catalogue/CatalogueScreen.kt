@@ -26,13 +26,17 @@ import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
+import androidx.navigation.NavGraph.Companion.findStartDestination
+import androidx.navigation.NavHostController
 import com.example.android_db5_ps003.R
+import com.example.android_db5_ps003.ui.navigation.Screen
 import com.example.android_db5_ps003.ui.screen.umkm.UmkmActivity
 
 
 @Composable
 fun CatalogueScreen(
-    modifier: Modifier = Modifier
+    modifier: Modifier = Modifier,
+    navController: NavHostController? = null
 ) {
     val context = LocalContext.current
 
@@ -49,7 +53,15 @@ fun CatalogueScreen(
         CatalogueItem(
             icon = painterResource(id = R.drawable.ic_food),
             text = stringResource(R.string.katalog_kuliner),
-            onClick = { /* TODO */ }
+            onClick = {
+                navController?.navigate(Screen.Kuliner.route) {
+                    popUpTo(navController.graph.findStartDestination().id) {
+                        saveState = true
+                    }
+                    launchSingleTop = true
+                    restoreState = true
+                }
+            }
         )
         CatalogueItem(
             icon = painterResource(id = R.drawable.ic_store),
