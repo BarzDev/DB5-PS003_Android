@@ -90,13 +90,7 @@ fun SmartCityApp(
                 CatalogueScreen(
                     navController = navController,
                     navigateToKuliner = {
-                        navController.navigate(Screen.Kuliner.route) {
-                            popUpTo(navController.graph.findStartDestination().id) {
-                                saveState = true
-                            }
-                            launchSingleTop = true
-                            restoreState = true
-                        }
+                        navController.navigate(Screen.Kuliner.route)
                     },
                     navigateToTourism = {
                         navController.navigate(Screen.Tourism.route)
