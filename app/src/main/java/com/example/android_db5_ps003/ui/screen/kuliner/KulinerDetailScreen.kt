@@ -255,13 +255,13 @@ fun KulinerDetailContent(
 fun KulinerDetailPreview() {
     val mockKuliner = DataItem(
         id = 1,
-        name = "Nasi Goreng Special dengan Bumbu Rempah Tradisional",
+        name = "",
         price = 35000,
-        location = "Jl. Sudirman No. 123, Jakarta Pusat",
+        location = "",
         category = "Main Course",
-        img = "https://example.com/nasigoreng.jpg",
-        description = "Nasi goreng spesial dengan campuran daging ayam, udang, telur, dan sayuran segar. Dibuat dengan bumbu rempah tradisional yang memberikan cita rasa autentik. Disajikan dengan kerupuk, acar, dan sambal spesial buatan sendiri. Cocok untuk sarapan, makan siang, maupun makan malam.",
-        contact = "0812-3456-7890 / @nasigorengspecial",
+        img = "",
+        description = "",
+        contact = "",
         ratings = 4.5
     )
 

@@ -270,7 +270,7 @@ fun TabLayout(
 //                    data = listOf(
 //                        DataItem(
 //                            id = 1,
-//                            name = "Nasi Goreng",
+//                            name = "Nasi",
 //                            price = 25000,
 //                            location = "Jakarta",
 //                            category = "Main Course",

@@ -10,7 +10,7 @@ import kotlinx.coroutines.flow.StateFlow
 import kotlinx.coroutines.flow.catch
 import kotlinx.coroutines.launch
 
-class NewsViewModel(val newsRepository: NewsRepository) : ViewModel() {
+class NewsViewModel(private val newsRepository: NewsRepository) : ViewModel() {
     private val _uiState : MutableStateFlow<UiState<List<NewsItem>>> = MutableStateFlow(UiState.Loading)
     val uiState : StateFlow<UiState<List<NewsItem>>> get() = _uiState
 

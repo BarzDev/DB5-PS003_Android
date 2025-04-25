@@ -9,7 +9,7 @@ import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.flow
 import kotlinx.coroutines.flow.map
 
-class NewsRepository(val dao: NewsDao) {
+class NewsRepository(private val dao: NewsDao) {
     suspend fun getAllDataFromApi() {
         val response = ApiConfig.getApiService().getDataBerita()
         val entities = response.data.orEmpty()

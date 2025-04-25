@@ -3,7 +3,6 @@ package com.example.android_db5_ps003.ui.screen.kuliner
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.example.android_db5_ps003.data.remote.response.DataItem
-import com.example.android_db5_ps003.data.remote.retrofit.ApiService
 import com.example.android_db5_ps003.data.repository.KulinerRepository
 import com.example.android_db5_ps003.ui.common.UiState
 import kotlinx.coroutines.flow.MutableStateFlow
@@ -19,7 +18,6 @@ class KulinerViewModel(private val repository: KulinerRepository) : ViewModel() 
     val isLoading: StateFlow<Boolean> = _isLoading.asStateFlow()
 
     private val _errorMessage = MutableStateFlow<String?>(null)
-    val errorMessage: StateFlow<String?> = _errorMessage.asStateFlow()
 
     private val _statuses = MutableStateFlow<List<String>>(emptyList())
     val statuses: StateFlow<List<String>> = _statuses.asStateFlow()
@@ -79,20 +77,5 @@ class KulinerViewModel(private val repository: KulinerRepository) : ViewModel() 
                 _searchResults.value = results
             }
         }
-    }
-
-    fun searchResults(): List<DataItem> {
-        return _kulinerList.value.filter {
-            it.name?.contains(_searchQuery.value, ignoreCase = true) == true ||
-                    it.category?.contains(_searchQuery.value, ignoreCase = true) == true
-        }
-    }
-
-    fun getKulinerByStatus(status: String): List<DataItem> {
-        return _kulinerList.value.filter { it.status == status }
-    }
-
-    fun getRecommendedKuliner(): List<DataItem> {
-        return _kulinerList.value.filter { it.status == "Recommended" }
     }
 }

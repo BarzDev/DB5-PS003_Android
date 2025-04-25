@@ -86,7 +86,7 @@ fun Item_column(
 
                 if (!kuliner.category.isNullOrEmpty()) {
                     Text(
-                        text = kuliner.category ?: "",
+                        text = kuliner.category,
                         style = MaterialTheme.typography.labelSmall.copy(
                             color = MaterialTheme.colorScheme.onSurfaceVariant
                         ),

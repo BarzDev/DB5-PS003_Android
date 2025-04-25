@@ -83,7 +83,7 @@ fun NewsBanner(
                     ),
                     modifier = Modifier
                         .align(Alignment.BottomStart)
-                        .offset(y = -20.dp)
+                        .offset(y = (-20).dp)
                         .padding(horizontal = 8.dp)
                         .background(
                             color = Color.Black.copy(alpha = 0.4f),

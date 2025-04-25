@@ -3,7 +3,6 @@ package com.example.android_db5_ps003.ui.screen.emergency_call
 import android.content.Context
 import android.content.Intent
 import android.net.Uri
-import android.util.Log
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
@@ -21,7 +20,6 @@ import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.style.TextAlign
-import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import androidx.lifecycle.viewmodel.compose.viewModel
@@ -29,7 +27,6 @@ import com.example.android_db5_ps003.R
 import com.example.android_db5_ps003.data.model.EmergencyCalls
 import com.example.android_db5_ps003.di.Injection
 import com.example.android_db5_ps003.ui.components.emergency_call.Emergency_Public_ItemLayout
-import com.example.android_db5_ps003.ui.theme.Android_DB5PS003Theme
 import com.example.android_db5_ps003.ui.viewmodelfactory.EmergencyViewModelFactory
 
 @Composable
@@ -38,7 +35,7 @@ fun EmergencyCallScreen(
     context: Context = LocalContext.current,
     viewModel: EmergencyCallViewModel = viewModel(
         factory = EmergencyViewModelFactory(
-            repository = Injection.provideEmergencyRepository(context)
+            repository = Injection.provideEmergencyRepository()
         )
     )
 ) {
