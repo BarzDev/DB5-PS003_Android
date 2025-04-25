@@ -42,6 +42,8 @@ import com.example.android_db5_ps003.ui.screen.news.NewsDetailScreen
 import com.example.android_db5_ps003.ui.screen.news.NewsScreen
 import com.example.android_db5_ps003.ui.screen.tourism.TourismScreen
 import com.example.android_db5_ps003.ui.screen.tourism_detail.TourismDetailScreen
+import com.example.android_db5_ps003.ui.screen.umkm.umkm_catalogue.UmkmCatalogueScreen
+import com.example.android_db5_ps003.ui.screen.umkm.umkm_detail.UmkmDetailScreen
 import com.example.android_db5_ps003.ui.theme.Android_DB5PS003Theme
 
 @Composable
@@ -98,6 +100,9 @@ fun SmartCityApp(
                     },
                     navigateToTourism = {
                         navController.navigate(Screen.Tourism.route)
+                    },
+                    navigateToUmkm =   {
+                        navController.navigate(Screen.UmkmCatalogue.route)
                     }
                 )
             }
@@ -153,6 +158,20 @@ fun SmartCityApp(
                 NewsDetailScreen(
                     id = id
                 )
+            }
+
+            composable(Screen.UmkmCatalogue.route) {
+                UmkmCatalogueScreen(
+                    navigateToDetail = { id ->
+                        navController.navigate(Screen.UmkmDetail.createRoute(id))
+                    },
+                )
+            }
+            composable(
+                route = Screen.UmkmDetail.route,
+                arguments = listOf(navArgument("id") { type = NavType.IntType }),
+            ) {
+                UmkmDetailScreen(id = it.arguments?.getInt("id") ?: 0)
             }
         }
     }

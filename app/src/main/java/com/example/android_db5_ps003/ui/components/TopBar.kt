@@ -26,7 +26,6 @@ import com.example.android_db5_ps003.ui.navigation.Screen
 fun TopBar(
     navController: NavHostController,
 ) {
-    val context = LocalContext.current
     val navBackStackEntry by navController.currentBackStackEntryAsState()
     val currentRoute = navBackStackEntry?.destination?.route
 
@@ -54,11 +53,7 @@ fun TopBar(
         modifier = Modifier,
         navigationIcon = {
             IconButton(onClick = {
-                if (currentRoute == Screen.UmkmCatalogue.route) {
-                    (context as? Activity)?.finish()
-                } else {
                     navController.navigateUp()
-                }
             }
             ) {
                 if (currentRoute != Screen.Home.route)
