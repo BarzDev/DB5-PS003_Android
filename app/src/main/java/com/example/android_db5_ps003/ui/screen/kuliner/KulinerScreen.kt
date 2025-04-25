@@ -63,7 +63,7 @@ fun KulinerScreen(
                     query = searchQuery,
                     onQueryChange = { viewModel.updateSearchQuery(it) },
                     modifier = Modifier,
-                    placeholder = "Search Food & Beverages"
+                    placeholder = "Cari Kuliner"
                 )
 
                 if (searchQuery.isNotEmpty()) {
