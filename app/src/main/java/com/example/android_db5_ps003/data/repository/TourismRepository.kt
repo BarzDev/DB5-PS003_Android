@@ -19,6 +19,7 @@ class TourismRepository(
                 val response = apiService.getTourism()
                 val tourism = response.data
                 emit(UiState.Success(tourism))
+                listTourism.clear()
                 listTourism.addAll(tourism)
             } catch (e: Exception) {
                 emit(UiState.Error(e.message.toString()))
