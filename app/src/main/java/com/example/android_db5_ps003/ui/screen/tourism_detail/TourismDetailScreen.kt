@@ -43,7 +43,7 @@ import androidx.lifecycle.viewmodel.compose.viewModel
 import coil.compose.AsyncImage
 import com.example.android_db5_ps003.R
 import com.example.android_db5_ps003.data.remote.response.Tourism
-import com.example.android_db5_ps003.ui.TourismViewModelFactory
+import com.example.android_db5_ps003.ui.viewmodelfactory.TourismViewModelFactory
 import com.example.android_db5_ps003.ui.common.UiState
 import com.example.android_db5_ps003.ui.components.LoadingComponent
 
