@@ -56,7 +56,7 @@ fun Item_column(
             verticalAlignment = Alignment.CenterVertically
         ) {
             Image(
-                painter = rememberAsyncImagePainter(model = kuliner.img),
+                painter = rememberAsyncImagePainter(model = kuliner.img, placeholder = painterResource(R.drawable.ic_refresh_black)),
                 contentDescription = kuliner.name,
                 contentScale = ContentScale.Crop,
                 modifier = Modifier
