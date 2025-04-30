@@ -43,7 +43,7 @@ class KulinerViewModel(private val repository: KulinerRepository) : ViewModel() 
                 if (response.status == 200) {
                     val nonNullData = response.data?.filterNotNull() ?: emptyList()
                     _kulinerList.value = nonNullData
-                    _statuses.value = nonNullData.mapNotNull { it.status }
+                    _statuses.value = nonNullData.mapNotNull { it.status }.distinct()
                     _uiState.value = UiState.Success(nonNullData)
                 } else {
                     val errorMsg = response.message ?: "Unknown error"

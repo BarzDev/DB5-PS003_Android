@@ -2,6 +2,8 @@ package com.example.android_db5_ps003.ui.screen.home
 
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
+import com.example.android_db5_ps003.data.model.BannerData
+import com.example.android_db5_ps003.data.model.toBannerData
 import com.example.android_db5_ps003.data.remote.response.NewsItem
 import com.example.android_db5_ps003.data.repository.NewsRepository
 import com.example.android_db5_ps003.ui.common.UiState
@@ -11,8 +13,12 @@ import kotlinx.coroutines.flow.catch
 import kotlinx.coroutines.launch
 
 class HomeViewModel(private val newsRepository: NewsRepository) : ViewModel() {
-    private val _uiState : MutableStateFlow<UiState<List<NewsItem>>> = MutableStateFlow(UiState.Loading)
-    val uiState : StateFlow<UiState<List<NewsItem>>> get() = _uiState
+    private val _uiState: MutableStateFlow<UiState<List<NewsItem>>> =
+        MutableStateFlow(UiState.Loading)
+    val uiState: StateFlow<UiState<List<NewsItem>>> get() = _uiState
+
+    private val _bannerData: MutableStateFlow<List<BannerData>> = MutableStateFlow(emptyList())
+    val bannerData: StateFlow<List<BannerData>> get() = _bannerData
 
     init {
         viewModelScope.launch {
@@ -28,6 +34,10 @@ class HomeViewModel(private val newsRepository: NewsRepository) : ViewModel() {
                 }
                 .collect { data ->
                     _uiState.value = UiState.Success(data)
+                    _bannerData.value = data
+                        .shuffled()
+                        .take(5)
+                        .map { it.toBannerData() }
                 }
         }
     }

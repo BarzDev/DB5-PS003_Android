@@ -2,9 +2,7 @@ package com.example.android_db5_ps003.ui.screen.home
 
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.PaddingValues
-import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
-import androidx.compose.foundation.layout.width
 import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.foundation.lazy.LazyRow
 import androidx.compose.foundation.lazy.items
@@ -22,7 +20,6 @@ import androidx.compose.ui.unit.sp
 import androidx.lifecycle.viewmodel.compose.viewModel
 import com.example.android_db5_ps003.R
 import com.example.android_db5_ps003.data.model.BannerData
-import com.example.android_db5_ps003.data.model.toBannerData
 import com.example.android_db5_ps003.data.remote.response.NewsItem
 import com.example.android_db5_ps003.di.Injection
 import com.example.android_db5_ps003.ui.common.UiState
@@ -66,12 +63,9 @@ fun HomeScreen(
 
         is UiState.Success -> {
             val newsData = (uiState as UiState.Success).data
-            val bannerData = newsData
-                .shuffled()
-                .take(5)
-                .map { it.toBannerData() }
+            val bannerData = viewModel.bannerData.collectAsState()
             HomeContent(
-                banners = bannerData,
+                banners = bannerData.value,
                 newsData = newsData.take(5),
                 navigateToNewsCatalogue = navigateToNewsCatalogue,
                 navigateToNewsDetail = navigateToNewsDetail,
