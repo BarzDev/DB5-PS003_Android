@@ -13,8 +13,7 @@ class TourismViewModelFactory private constructor(private val tourismRepository:
     override fun <T : ViewModel> create(modelClass: Class<T>): T {
         if (modelClass.isAssignableFrom(TourismViewModel::class.java)) {
             return TourismViewModel(tourismRepository) as T
-        }
-        else if (modelClass.isAssignableFrom(TourismDetailViewModel::class.java)) {
+        } else if (modelClass.isAssignableFrom(TourismDetailViewModel::class.java)) {
             return TourismDetailViewModel(tourismRepository) as T
         }
         throw IllegalArgumentException("Unknown ViewModel class: " + modelClass.name)

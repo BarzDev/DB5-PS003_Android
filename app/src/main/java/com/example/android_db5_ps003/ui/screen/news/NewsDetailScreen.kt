@@ -22,11 +22,11 @@ import androidx.lifecycle.viewmodel.compose.viewModel
 import coil.compose.AsyncImage
 import coil.request.ImageRequest
 import com.example.android_db5_ps003.di.Injection
-import com.example.android_db5_ps003.ui.viewmodelfactory.NewsViewModelFactory
 import com.example.android_db5_ps003.ui.common.UiState
 import com.example.android_db5_ps003.ui.components.ErrorHandlerComponent
 import com.example.android_db5_ps003.ui.components.LoadingComponent
 import com.example.android_db5_ps003.ui.theme.Android_DB5PS003Theme
+import com.example.android_db5_ps003.ui.viewmodelfactory.NewsViewModelFactory
 
 @Composable
 fun NewsDetailScreen(
@@ -51,9 +51,11 @@ fun NewsDetailScreen(
                 viewModel.getNewsById(id)
             }
         }
+
         is UiState.Loading -> {
             LoadingComponent()
         }
+
         is UiState.Success -> {
             val data = (uiState as UiState.Success).data
             NewsDetailContent(

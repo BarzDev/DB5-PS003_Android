@@ -11,10 +11,11 @@ import kotlinx.coroutines.flow.catch
 import kotlinx.coroutines.launch
 
 class NewsDetailViewModel(val repository: NewsRepository) : ViewModel() {
-    private val _uiState : MutableStateFlow<UiState<List<NewsItem>>> = MutableStateFlow(UiState.Loading)
-    val uiState : StateFlow<UiState<List<NewsItem>>> get() = _uiState
+    private val _uiState: MutableStateFlow<UiState<List<NewsItem>>> =
+        MutableStateFlow(UiState.Loading)
+    val uiState: StateFlow<UiState<List<NewsItem>>> get() = _uiState
 
-    fun getNewsById(id : Int) {
+    fun getNewsById(id: Int) {
         viewModelScope.launch {
             repository.getNewsById(id)
                 .catch { e ->

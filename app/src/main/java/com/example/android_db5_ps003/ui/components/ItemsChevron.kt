@@ -1,6 +1,5 @@
 package com.example.android_db5_ps003.ui.components
 
-import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.padding
 import androidx.compose.material3.Icon
@@ -20,8 +19,8 @@ import com.example.android_db5_ps003.ui.theme.Android_DB5PS003Theme
 @Composable
 fun ItemsChevron(
     modifier: Modifier = Modifier,
-    fieldName : String,
-    ) {
+    fieldName: String,
+) {
     Row(
         modifier = modifier,
         verticalAlignment = Alignment.CenterVertically

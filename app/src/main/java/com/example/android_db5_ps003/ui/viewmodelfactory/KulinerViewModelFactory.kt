@@ -2,8 +2,6 @@ package com.example.android_db5_ps003.ui.viewmodelfactory
 
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.ViewModelProvider
-import com.example.android_db5_ps003.data.remote.retrofit.ApiConfig
-import com.example.android_db5_ps003.data.remote.retrofit.ApiService
 import com.example.android_db5_ps003.data.repository.KulinerRepository
 import com.example.android_db5_ps003.ui.screen.kuliner.KulinerViewModel
 

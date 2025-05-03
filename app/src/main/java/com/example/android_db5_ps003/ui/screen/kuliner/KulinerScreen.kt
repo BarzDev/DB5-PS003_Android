@@ -1,12 +1,37 @@
 package com.example.android_db5_ps003.ui.screen.kuliner
 
 import androidx.compose.foundation.background
-import androidx.compose.foundation.layout.*
+import androidx.compose.foundation.layout.Arrangement
+import androidx.compose.foundation.layout.Box
+import androidx.compose.foundation.layout.Column
+import androidx.compose.foundation.layout.PaddingValues
+import androidx.compose.foundation.layout.Spacer
+import androidx.compose.foundation.layout.fillMaxSize
+import androidx.compose.foundation.layout.fillMaxWidth
+import androidx.compose.foundation.layout.height
+import androidx.compose.foundation.layout.offset
+import androidx.compose.foundation.layout.padding
+import androidx.compose.foundation.layout.width
+import androidx.compose.foundation.layout.wrapContentSize
 import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.foundation.lazy.LazyRow
 import androidx.compose.foundation.lazy.items
-import androidx.compose.material3.*
-import androidx.compose.runtime.*
+import androidx.compose.material3.CircularProgressIndicator
+import androidx.compose.material3.HorizontalDivider
+import androidx.compose.material3.MaterialTheme
+import androidx.compose.material3.Scaffold
+import androidx.compose.material3.ScrollableTabRow
+import androidx.compose.material3.Tab
+import androidx.compose.material3.Text
+import androidx.compose.runtime.Composable
+import androidx.compose.runtime.LaunchedEffect
+import androidx.compose.runtime.collectAsState
+import androidx.compose.runtime.derivedStateOf
+import androidx.compose.runtime.getValue
+import androidx.compose.runtime.mutableStateListOf
+import androidx.compose.runtime.mutableStateOf
+import androidx.compose.runtime.remember
+import androidx.compose.runtime.rememberCoroutineScope
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
@@ -18,6 +43,7 @@ import androidx.navigation.NavController
 import com.example.android_db5_ps003.data.remote.response.DataItem
 import com.example.android_db5_ps003.di.Injection
 import com.example.android_db5_ps003.ui.common.UiState
+import com.example.android_db5_ps003.ui.components.SearchBar
 import com.example.android_db5_ps003.ui.components.kuliner.Item_column
 import com.example.android_db5_ps003.ui.components.kuliner.Item_row
 import com.example.android_db5_ps003.ui.viewmodelfactory.KulinerViewModelFactory
@@ -25,7 +51,6 @@ import com.google.accompanist.pager.ExperimentalPagerApi
 import com.google.accompanist.pager.HorizontalPager
 import com.google.accompanist.pager.PagerState
 import com.google.accompanist.pager.rememberPagerState
-import com.example.android_db5_ps003.ui.components.SearchBar
 import kotlinx.coroutines.launch
 
 @OptIn(ExperimentalPagerApi::class)
@@ -90,9 +115,11 @@ fun KulinerScreen(
                         CircularProgressIndicator()
                     }
                 }
+
                 is UiState.Success -> {
                     val data = (uiState as UiState.Success).data
                 }
+
                 is UiState.Error -> {
                     Box(modifier = Modifier.fillMaxSize(), contentAlignment = Alignment.Center) {
                         Text(text = (uiState as UiState.Error).errorMessage)
@@ -110,7 +137,8 @@ fun KulinerScreen(
                             text = "No results found for \"$searchQuery\"",
                             style = MaterialTheme.typography.bodyLarge.copy(
                                 color = MaterialTheme.colorScheme.primary
-                            ))
+                            )
+                        )
                     }
                 } else {
                     LazyColumn(

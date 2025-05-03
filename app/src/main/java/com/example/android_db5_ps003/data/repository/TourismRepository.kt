@@ -12,7 +12,7 @@ class TourismRepository(
 ) {
     private val listTourism = mutableListOf<Tourism>()
 
-    fun getAllTourism() : Flow<UiState<List<Tourism>>> {
+    fun getAllTourism(): Flow<UiState<List<Tourism>>> {
         return flow {
             emit(UiState.Loading)
             try {
@@ -27,7 +27,7 @@ class TourismRepository(
         }
     }
 
-    fun getTourismDetail(id: Int) : Flow<UiState<Tourism>> {
+    fun getTourismDetail(id: Int): Flow<UiState<Tourism>> {
         return flow {
             emit(UiState.Loading)
             try {
@@ -40,7 +40,7 @@ class TourismRepository(
         }
     }
 
-    fun searchTourism(query: String) : Flow<List<Tourism>> {
+    fun searchTourism(query: String): Flow<List<Tourism>> {
         return flowOf(
             listTourism.filter {
                 it.name.contains(query, ignoreCase = true)

@@ -1,7 +1,6 @@
 package com.example.android_db5_ps003.ui.components
 
 import androidx.compose.foundation.background
-import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
 import androidx.compose.material.icons.Icons
@@ -52,54 +51,54 @@ fun SearchBar(
     }
 
 
-        TextField(
-            value = text,
-            onValueChange = { text = it },
-            placeholder = {
-                Text(stringResource(R.string.search, placeholder))
-            },
-            leadingIcon = {
-                Icon(
-                    imageVector = Icons.Default.Search,
-                    contentDescription = "Search Icon",
-                    tint = MaterialTheme.colorScheme.primary
-                )
-            },
-            colors = TextFieldDefaults.colors(
-                unfocusedContainerColor = Color.White,
-                focusedContainerColor = Color.White,
-                unfocusedIndicatorColor = Color.Transparent,
-                focusedIndicatorColor = Color.Transparent,
-                unfocusedTextColor = MaterialTheme.colorScheme.onSurface,
-                focusedTextColor = MaterialTheme.colorScheme.primary,
-                cursorColor = MaterialTheme.colorScheme.primary,
-                unfocusedLeadingIconColor = MaterialTheme.colorScheme.onSurfaceVariant,
-                focusedLeadingIconColor = MaterialTheme.colorScheme.primary
-            ),
-            shape = shapes.medium,
-            singleLine = true,
-            modifier = modifier
-                .fillMaxWidth()
-                .padding(horizontal = 16.dp, vertical = 8.dp)
-                .shadow(2.dp, shapes.medium)
-                .background(Color.White, shapes.medium)
-        )
+    TextField(
+        value = text,
+        onValueChange = { text = it },
+        placeholder = {
+            Text(stringResource(R.string.search, placeholder))
+        },
+        leadingIcon = {
+            Icon(
+                imageVector = Icons.Default.Search,
+                contentDescription = "Search Icon",
+                tint = MaterialTheme.colorScheme.primary
+            )
+        },
+        colors = TextFieldDefaults.colors(
+            unfocusedContainerColor = Color.White,
+            focusedContainerColor = Color.White,
+            unfocusedIndicatorColor = Color.Transparent,
+            focusedIndicatorColor = Color.Transparent,
+            unfocusedTextColor = MaterialTheme.colorScheme.onSurface,
+            focusedTextColor = MaterialTheme.colorScheme.primary,
+            cursorColor = MaterialTheme.colorScheme.primary,
+            unfocusedLeadingIconColor = MaterialTheme.colorScheme.onSurfaceVariant,
+            focusedLeadingIconColor = MaterialTheme.colorScheme.primary
+        ),
+        shape = shapes.medium,
+        singleLine = true,
+        modifier = modifier
+            .fillMaxWidth()
+            .padding(horizontal = 16.dp, vertical = 8.dp)
+            .shadow(2.dp, shapes.medium)
+            .background(Color.White, shapes.medium)
+    )
 
-        Text(
-            text = "Hasil: $count",
-            modifier = modifier.padding(top = 5.dp, start = 16.dp,)
-        )
-    }
-
-
+    Text(
+        text = "Hasil: $count",
+        modifier = modifier.padding(top = 5.dp, start = 16.dp)
+    )
+}
 
 
 @Composable
 @Preview(showBackground = true)
 fun SearchBarPreview() {
-    SearchBar(query = "",
+    SearchBar(
+        query = "",
         onQueryChange = {},
         placeholder = "apa yah?",
         count = 10,
-        modifier = Modifier)
+        modifier = Modifier
+    )
 }

@@ -9,9 +9,9 @@ class EmergencyViewModelFactory(private val repository: EmergencyRepository) :
     ViewModelProvider.NewInstanceFactory() {
     @Suppress("UNCHECKED_CAST")
     override fun <T : ViewModel> create(modelClass: Class<T>): T {
-        if(modelClass.isAssignableFrom(EmergencyCallViewModel::class.java)) {
+        if (modelClass.isAssignableFrom(EmergencyCallViewModel::class.java)) {
             return EmergencyCallViewModel(repository) as T
         }
-        throw IllegalArgumentException("Unknown ViewModel class : "+modelClass.name)
+        throw IllegalArgumentException("Unknown ViewModel class : " + modelClass.name)
     }
 }

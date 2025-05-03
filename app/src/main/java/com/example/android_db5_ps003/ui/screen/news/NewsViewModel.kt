@@ -11,11 +11,12 @@ import kotlinx.coroutines.flow.catch
 import kotlinx.coroutines.launch
 
 class NewsViewModel(private val newsRepository: NewsRepository) : ViewModel() {
-    private val _uiState : MutableStateFlow<UiState<List<NewsItem>>> = MutableStateFlow(UiState.Loading)
-    val uiState : StateFlow<UiState<List<NewsItem>>> get() = _uiState
+    private val _uiState: MutableStateFlow<UiState<List<NewsItem>>> =
+        MutableStateFlow(UiState.Loading)
+    val uiState: StateFlow<UiState<List<NewsItem>>> get() = _uiState
 
     private val _count = MutableStateFlow(0)
-    val count : StateFlow<Int> get() = _count
+    val count: StateFlow<Int> get() = _count
 
     init {
         viewModelScope.launch {
@@ -35,7 +36,7 @@ class NewsViewModel(private val newsRepository: NewsRepository) : ViewModel() {
         }
     }
 
-    fun search(query : String) {
+    fun search(query: String) {
         viewModelScope.launch {
             newsRepository.searchByQuery(query)
                 .catch { e ->

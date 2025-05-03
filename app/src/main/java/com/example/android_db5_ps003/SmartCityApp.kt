@@ -95,7 +95,7 @@ fun SmartCityApp(
                     navigateToTourism = {
                         navController.navigate(Screen.Tourism.route)
                     },
-                    navigateToUmkm =   {
+                    navigateToUmkm = {
                         navController.navigate(Screen.UmkmCatalogue.route)
                     }
                 )

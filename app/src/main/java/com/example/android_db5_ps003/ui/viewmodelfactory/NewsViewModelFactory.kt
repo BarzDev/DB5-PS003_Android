@@ -14,10 +14,10 @@ class NewsViewModelFactory(private val newsRepository: NewsRepository) :
         if (modelClass.isAssignableFrom(NewsViewModel::class.java)) {
             return NewsViewModel(newsRepository) as T
         }
-        if(modelClass.isAssignableFrom(HomeViewModel::class.java)) {
+        if (modelClass.isAssignableFrom(HomeViewModel::class.java)) {
             return HomeViewModel(newsRepository) as T
         }
-        if(modelClass.isAssignableFrom(NewsDetailViewModel::class.java)) {
+        if (modelClass.isAssignableFrom(NewsDetailViewModel::class.java)) {
             return NewsDetailViewModel(newsRepository) as T
         }
         throw IllegalArgumentException("Unknown ViewModel class :" + modelClass.name)

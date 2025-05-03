@@ -24,11 +24,11 @@ import androidx.lifecycle.compose.collectAsStateWithLifecycle
 import androidx.lifecycle.viewmodel.compose.viewModel
 import com.example.android_db5_ps003.R
 import com.example.android_db5_ps003.data.remote.response.Tourism
-import com.example.android_db5_ps003.ui.viewmodelfactory.TourismViewModelFactory
 import com.example.android_db5_ps003.ui.common.UiState
 import com.example.android_db5_ps003.ui.components.LoadingComponent
 import com.example.android_db5_ps003.ui.components.TourismItem
 import com.example.android_db5_ps003.ui.components.TourismSearchBar
+import com.example.android_db5_ps003.ui.viewmodelfactory.TourismViewModelFactory
 
 @Composable
 fun TourismScreen(
@@ -57,7 +57,8 @@ fun TourismScreen(
             }
 
             is UiState.Error -> {
-                Toast.makeText(LocalContext.current, uiState.errorMessage, Toast.LENGTH_SHORT).show()
+                Toast.makeText(LocalContext.current, uiState.errorMessage, Toast.LENGTH_SHORT)
+                    .show()
             }
         }
     }
@@ -73,9 +74,9 @@ fun TourismContent(
     onQueryChange: (String) -> Unit,
 ) {
     Scaffold { innerPadding ->
-        Column (
+        Column(
             modifier = modifier.padding(innerPadding),
-        ){
+        ) {
             TourismSearchBar(
                 query = query,
                 onQueryChange = onQueryChange,
@@ -86,7 +87,7 @@ fun TourismContent(
                     .padding(bottom = 4.dp)
             )
             if (query.isNotEmpty()) {
-                Row (
+                Row(
                     modifier = modifier.padding(horizontal = 32.dp)
                 ) {
                     Text(

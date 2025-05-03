@@ -23,8 +23,8 @@ import com.example.android_db5_ps003.di.Injection
 import com.example.android_db5_ps003.ui.common.UiState
 import com.example.android_db5_ps003.ui.components.ErrorHandlerComponent
 import com.example.android_db5_ps003.ui.components.LoadingComponent
-import com.example.android_db5_ps003.ui.components.news.NewsListItem
 import com.example.android_db5_ps003.ui.components.SearchBar
+import com.example.android_db5_ps003.ui.components.news.NewsListItem
 import com.example.android_db5_ps003.ui.theme.Android_DB5PS003Theme
 import com.example.android_db5_ps003.ui.viewmodelfactory.NewsViewModelFactory
 

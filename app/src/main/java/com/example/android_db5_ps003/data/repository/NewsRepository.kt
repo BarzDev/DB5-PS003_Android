@@ -6,7 +6,6 @@ import com.example.android_db5_ps003.data.model.toNewsItem
 import com.example.android_db5_ps003.data.remote.response.NewsItem
 import com.example.android_db5_ps003.data.remote.retrofit.ApiConfig
 import kotlinx.coroutines.flow.Flow
-import kotlinx.coroutines.flow.flow
 import kotlinx.coroutines.flow.map
 
 class NewsRepository(private val dao: NewsDao) {
@@ -25,19 +24,18 @@ class NewsRepository(private val dao: NewsDao) {
         }
     }
 
-    fun getNewsById(id : Int) : Flow<List<NewsItem>> {
+    fun getNewsById(id: Int): Flow<List<NewsItem>> {
         return dao.getNewsById(id).map { item ->
             item.map { it.toNewsItem() }
         }
     }
 
-    fun searchByQuery(query : String) : Flow<List<NewsItem>> {
-        if(query.isNotEmpty()) {
+    fun searchByQuery(query: String): Flow<List<NewsItem>> {
+        if (query.isNotEmpty()) {
             return dao.getSearchedNews(query).map { list ->
                 list.map { it.toNewsItem() }
             }
-        }
-        else {
+        } else {
             return getNewsFromRoom()
         }
     }

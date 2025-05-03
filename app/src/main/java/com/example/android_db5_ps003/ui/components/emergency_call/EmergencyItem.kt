@@ -1,6 +1,5 @@
 package com.example.android_db5_ps003.ui.components.emergency_call
 
-import androidx.compose.foundation.Image
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size

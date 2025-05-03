@@ -71,8 +71,14 @@ class KulinerViewModel(private val repository: KulinerRepository) : ViewModel() 
             } else {
                 val results = _kulinerList.value.filter { kuliner ->
                     kuliner.name?.contains(_searchQuery.value, ignoreCase = true) == true ||
-                            kuliner.category?.contains(_searchQuery.value, ignoreCase = true) == true ||
-                            kuliner.description?.contains(_searchQuery.value, ignoreCase = true) == true
+                            kuliner.category?.contains(
+                                _searchQuery.value,
+                                ignoreCase = true
+                            ) == true ||
+                            kuliner.description?.contains(
+                                _searchQuery.value,
+                                ignoreCase = true
+                            ) == true
                 }
                 _searchResults.value = results
             }

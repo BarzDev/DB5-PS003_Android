@@ -4,13 +4,13 @@ import com.google.gson.annotations.SerializedName
 
 data class TourismDetailResponse(
 
-	@field:SerializedName("data")
-	val data: Tourism,
+    @field:SerializedName("data")
+    val data: Tourism,
 
-	@field:SerializedName("message")
-	val message: String,
+    @field:SerializedName("message")
+    val message: String,
 
-	@field:SerializedName("status")
-	val status: Int
+    @field:SerializedName("status")
+    val status: Int
 
 )

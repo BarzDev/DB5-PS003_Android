@@ -8,7 +8,6 @@ import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.offset
 import androidx.compose.foundation.layout.padding
-import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.pager.HorizontalPager
 import androidx.compose.foundation.pager.rememberPagerState
 import androidx.compose.foundation.shape.RoundedCornerShape
@@ -39,7 +38,7 @@ import com.example.android_db5_ps003.data.model.BannerData
 fun NewsBanner(
     modifier: Modifier = Modifier,
     banners: List<BannerData>,
-    navigateToNewsDetail : (Long) -> Unit
+    navigateToNewsDetail: (Long) -> Unit
 ) {
     val pagerState = rememberPagerState { banners.size }
 
@@ -98,7 +97,8 @@ fun NewsBanner(
                 .align(Alignment.BottomCenter)
         ) {
             repeat(banners.size) { index ->
-                val color = if (pagerState.currentPage == index) MaterialTheme.colorScheme.primary else Color.LightGray
+                val color =
+                    if (pagerState.currentPage == index) MaterialTheme.colorScheme.primary else Color.LightGray
                 Icon(
                     painter = painterResource(R.drawable.ic_dot),
                     tint = color,

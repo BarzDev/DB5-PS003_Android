@@ -8,12 +8,12 @@ import com.example.android_db5_ps003.data.local.entity.NewsEntity
 
 @Database(entities = [NewsEntity::class], version = 1, exportSchema = false)
 abstract class SmartCityDatabase : RoomDatabase() {
-    abstract fun newsDao() : NewsDao
+    abstract fun newsDao(): NewsDao
 
     companion object {
         @Volatile
         private var instance: SmartCityDatabase? = null
-        fun getInstance(context : Context): SmartCityDatabase =
+        fun getInstance(context: Context): SmartCityDatabase =
             instance ?: synchronized(this) {
                 instance ?: Room.databaseBuilder(
                     context = context.applicationContext,

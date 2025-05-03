@@ -7,8 +7,8 @@ import com.example.android_db5_ps003.data.remote.retrofit.ApiService
 import com.example.android_db5_ps003.data.repository.EmergencyRepository
 import com.example.android_db5_ps003.data.repository.KulinerRepository
 import com.example.android_db5_ps003.data.repository.NewsRepository
-import com.example.android_db5_ps003.data.repository.UmkmRepository
 import com.example.android_db5_ps003.data.repository.TourismRepository
+import com.example.android_db5_ps003.data.repository.UmkmRepository
 
 object Injection {
     fun provideEmergencyRepository(): EmergencyRepository {

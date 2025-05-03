@@ -43,9 +43,9 @@ import androidx.lifecycle.viewmodel.compose.viewModel
 import coil.compose.AsyncImage
 import com.example.android_db5_ps003.R
 import com.example.android_db5_ps003.data.remote.response.Tourism
-import com.example.android_db5_ps003.ui.viewmodelfactory.TourismViewModelFactory
 import com.example.android_db5_ps003.ui.common.UiState
 import com.example.android_db5_ps003.ui.components.LoadingComponent
+import com.example.android_db5_ps003.ui.viewmodelfactory.TourismViewModelFactory
 
 @Composable
 fun TourismDetailScreen(
@@ -72,7 +72,8 @@ fun TourismDetailScreen(
             }
 
             is UiState.Error -> {
-                Toast.makeText(LocalContext.current, uiState.errorMessage, Toast.LENGTH_SHORT).show()
+                Toast.makeText(LocalContext.current, uiState.errorMessage, Toast.LENGTH_SHORT)
+                    .show()
             }
         }
     }
@@ -89,8 +90,7 @@ fun TourismDetailContent(
 
     Scaffold(
         modifier = modifier.nestedScroll(scrollBehavior.nestedScrollConnection),
-    ) {
-        innerPadding ->
+    ) { innerPadding ->
         Column(
             modifier = modifier
                 .fillMaxSize()
@@ -199,6 +199,6 @@ fun TourismDetailContentPreview() {
             rating = 4.5,
             link = "https://via.placeholder.com/600x400"
         ),
-        onNavigateButtonClicked = {  }
+        onNavigateButtonClicked = { }
     )
 }
